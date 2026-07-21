@@ -347,6 +347,68 @@
     color: var(--teal);
   }
 
+  /* Sudoku Board 9x9 */
+  .sudoku-board {
+    display: grid;
+    grid-template-columns: repeat(9, 1fr);
+    gap: 2px;
+    max-width: 450px;
+    margin: 0 auto;
+    background: var(--line-strong);
+    padding: 2px;
+    border-radius: 8px;
+  }
+
+  /* Border cho khối 3x3 */
+  .sd-cell {
+    aspect-ratio: 1;
+    background: #f4f8ff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 18px;
+    font-weight: 600;
+    border-radius: 3px;
+    transition: all 0.2s ease;
+    color: var(--text);
+    position: relative;
+  }
+
+  /* Đường viền khối 3x3 */
+  .sd-cell.block-border-right {
+    border-right: 2.5px solid var(--text-dim);
+  }
+  .sd-cell.block-border-bottom {
+    border-bottom: 2.5px solid var(--text-dim);
+  }
+
+  .sd-cell.active {
+    background: var(--amber-dim);
+    color: var(--amber);
+    box-shadow: 0 0 0 2px var(--amber) inset;
+    transform: scale(1.05);
+    z-index: 2;
+  }
+
+  .sd-cell.conflict {
+    background: var(--rose-dim);
+    color: var(--rose);
+    box-shadow: 0 0 0 2px var(--rose) inset;
+    animation: shake 0.3s ease;
+    z-index: 2;
+  }
+
+  .sd-cell.filled {
+    background: var(--teal-dim);
+    color: var(--teal);
+  }
+
+  .sd-cell.given {
+    background: #e8edf5;
+    color: var(--text);
+    font-weight: 700;
+  }
+
   @keyframes shake {
     0%, 100% { transform: translateX(0); }
     25% { transform: translateX(-4px); }
@@ -409,6 +471,12 @@
     .knowledge-grid {
       grid-template-columns: 1fr;
     }
+    .sudoku-board {
+      max-width: 340px;
+    }
+    .sd-cell {
+      font-size: 14px;
+    }
   }
 </style>
 </head>
@@ -422,6 +490,7 @@
   <div class="tabs">
     <div class="tab active" data-target="m1">🗺️ Map Coloring</div>
     <div class="tab" data-target="m2">♛ N-Queens (4x4)</div>
+    <div class="tab" data-target="m3">🧩 Sudoku (9x9)</div>
   </div>
 
   <!-- MODEL 1: MAP COLORING -->
@@ -514,6 +583,53 @@
       </div>
     </div>
   </div>
+
+  <!-- MODEL 3: SUDOKU 9x9 -->
+  <div class="model" id="m3">
+    <div class="demo-wrap">
+      <div class="panel">
+        <div class="panel-title">🧩 Sudoku 9x9 <span class="badge">81 ô</span></div>
+        <div class="sudoku-board" id="sudokuBoard"></div>
+        <div class="legend">
+          <span><i style="background:var(--teal)"></i> Đã điền</span>
+          <span><i style="background:var(--amber)"></i> Đang thử</span>
+          <span><i style="background:var(--rose)"></i> Xung đột</span>
+          <span><i style="background:#e8edf5;border:1px solid #ccc;"></i> Cho sẵn</span>
+        </div>
+      </div>
+      <div class="panel">
+        <div class="panel-title">📚 Stack <span class="badge">Ô đang xét</span></div>
+        <div class="stack-list" id="stackListS"></div>
+        <div class="explanation-box" id="sudokuExplanation">
+          <strong>🎯 Mục tiêu:</strong> Điền số 1-9 vào bảng 9x9 sao cho <span class="highlight">hàng, cột, khối 3x3</span> không trùng.
+          <br>📌 <strong>Ràng buộc:</strong> <span class="constraint-tag">Global</span> + <span class="constraint-tag">Binary</span> Kiểm tra hàng, cột, khối 3x3.
+          <br>🔍 <strong>Miền giá trị:</strong> {1,2,3,4,5,6,7,8,9} — hữu hạn, rời rạc.
+          <br>📐 <strong>Tổng số ô:</strong> 81 ô cần điền.
+        </div>
+      </div>
+    </div>
+    <div class="panel">
+      <div class="controls">
+        <button class="btn" id="sPrev">◀ Lùi</button>
+        <button class="btn primary" id="sNext">Tiến ▶</button>
+        <button class="btn" id="sAuto">▶ Tự động</button>
+        <button class="btn" id="sReset">⟳ Làm lại</button>
+        <span class="step-counter" id="sCounter">0 / 0</span>
+      </div>
+    </div>
+    <div class="knowledge-grid">
+      <div class="knowledge-card">
+        <div class="label">🔹 Ràng buộc</div>
+        <strong>Global + Binary:</strong> Kiểm tra hàng, cột, khối 3x3.<br>
+        <strong>Hard:</strong> Tất cả ràng buộc bắt buộc.
+      </div>
+      <div class="knowledge-card">
+        <div class="label">🔸 Miền giá trị</div>
+        <strong>Rời rạc hữu hạn:</strong> {1..9}.<br>
+        <strong>Unary:</strong> Mỗi ô chỉ nhận 1 giá trị.
+      </div>
+    </div>
+  </div>
 </div>
 
 <script>
@@ -525,7 +641,9 @@
         document.querySelectorAll('.model').forEach(x => x.classList.remove('active'));
         t.classList.add('active');
         document.getElementById(t.dataset.target).classList.add('active');
-        if (t.dataset.target === 'm1') { gStopAuto(); } else { qStopAuto(); }
+        if (t.dataset.target === 'm1') { gStopAuto(); } 
+        else if (t.dataset.target === 'm2') { qStopAuto(); }
+        else { sStopAuto(); }
       });
     });
 
@@ -541,7 +659,6 @@
       ['G', 'H']
     ];
     const COLOR_HEX = { teal: '#0f9d8e', amber: '#d48c1c', rose: '#c94a6b' };
-    const COLOR_NAMES = { teal: 'teal', amber: 'amber', rose: 'rose' };
     const COLORS = ['teal', 'amber', 'rose'];
     const POS = {
       A: [260, 64], D: [430, 132],
@@ -710,9 +827,7 @@
         }
       });
 
-      // Build explanation
       let msg = '';
-      let constraintType = 'Binary';
       if (f.type === 'push') {
         msg = `📌 Xét đỉnh <strong>${f.node}</strong> (thêm vào stack)`;
       } else if (f.type === 'try') {
@@ -790,7 +905,7 @@
 
     function generateQueensFrames() {
       const frames = [];
-      const board = Array(QN).fill(-1); // board[row] = col
+      const board = Array(QN).fill(-1);
       const stack = [];
 
       function snapshot(extra) {
@@ -871,7 +986,6 @@
       }
       const f = qFrames[qStep];
 
-      // Reset all cells
       qCells.forEach(cell => {
         const r = parseInt(cell.dataset.row);
         const col = parseInt(cell.dataset.col);
@@ -884,7 +998,6 @@
         }
       });
 
-      // Highlight current cell
       if (f.row !== undefined && (f.type === 'try' || f.type === 'assign' || f.type === 'conflict')) {
         const idx = f.row * QN + f.col;
         if (idx < qCells.length) {
@@ -895,7 +1008,6 @@
         }
       }
 
-      // Highlight conflict cell
       if (f.type === 'conflict' && f.withRow !== undefined) {
         const idx = f.withRow * QN + f.withCol;
         if (idx < qCells.length) {
@@ -903,9 +1015,7 @@
         }
       }
 
-      // Build explanation
       let msg = '';
-      let constraintType = 'Global';
       if (f.type === 'push') {
         msg = `📌 Xét hàng <strong>${f.row+1}</strong> (thêm vào stack)`;
       } else if (f.type === 'try') {
@@ -978,6 +1088,260 @@
     qReset.addEventListener('click', qResetFn);
     qAuto.addEventListener('click', qToggleAuto);
     renderQueens();
+
+    /* ============ MODEL 3: SUDOKU 9x9 ============ */
+    const SN = 9;
+
+    // Tạo bảng Sudoku 9x9 với một số ô cho sẵn
+    function createSudokuPuzzle() {
+      // Một puzzle Sudoku 9x9 hợp lệ (có lời giải)
+      const puzzle = [
+        [5, 3, 0, 0, 7, 0, 0, 0, 0],
+        [6, 0, 0, 1, 9, 5, 0, 0, 0],
+        [0, 9, 8, 0, 0, 0, 0, 6, 0],
+        [8, 0, 0, 0, 6, 0, 0, 0, 3],
+        [4, 0, 0, 8, 0, 3, 0, 0, 1],
+        [7, 0, 0, 0, 2, 0, 0, 0, 6],
+        [0, 6, 0, 0, 0, 0, 2, 8, 0],
+        [0, 0, 0, 4, 1, 9, 0, 0, 5],
+        [0, 0, 0, 0, 8, 0, 0, 7, 9]
+      ];
+      return puzzle.flat();
+    }
+
+    const SUDOKU_GIVEN = createSudokuPuzzle();
+
+    function generateSudokuFrames() {
+      const frames = [];
+      const board = [...SUDOKU_GIVEN];
+      const stack = [];
+
+      function snapshot(extra) {
+        return Object.assign({ board: [...board], stack: [...stack] }, extra);
+      }
+
+      function isValid(pos, val) {
+        const r = Math.floor(pos / SN),
+          c = pos % SN;
+        // Check row
+        for (let i = 0; i < SN; i++) {
+          if (i !== c && board[r * SN + i] === val) {
+            return { conflict: true, pos: r * SN + i, type: 'hàng' };
+          }
+        }
+        // Check column
+        for (let i = 0; i < SN; i++) {
+          if (i !== r && board[i * SN + c] === val) {
+            return { conflict: true, pos: i * SN + c, type: 'cột' };
+          }
+        }
+        // Check block 3x3
+        const br = Math.floor(r / 3) * 3,
+          bc = Math.floor(c / 3) * 3;
+        for (let i = br; i < br + 3; i++) {
+          for (let j = bc; j < bc + 3; j++) {
+            const p = i * SN + j;
+            if (p !== pos && board[p] === val) {
+              return { conflict: true, pos: p, type: 'khối 3x3' };
+            }
+          }
+        }
+        return { conflict: false };
+      }
+
+      function findEmpty() {
+        for (let p = 0; p < SN * SN; p++) {
+          if (board[p] === 0) return p;
+        }
+        return -1;
+      }
+
+      function backtrack() {
+        const pos = findEmpty();
+        if (pos === -1) {
+          frames.push(snapshot({ type: 'success' }));
+          return true;
+        }
+        stack.push(pos);
+        frames.push(snapshot({ type: 'push', pos }));
+        for (let val = 1; val <= SN; val++) {
+          frames.push(snapshot({ type: 'try', pos, val }));
+          const check = isValid(pos, val);
+          if (check.conflict) {
+            frames.push(snapshot({ type: 'conflict', pos, val, withPos: check.pos, conflictType: check.type }));
+            continue;
+          }
+          board[pos] = val;
+          frames.push(snapshot({ type: 'assign', pos, val }));
+          if (backtrack()) return true;
+          board[pos] = 0;
+          frames.push(snapshot({ type: 'backtrack', pos }));
+        }
+        frames.push(snapshot({ type: 'dead-end', pos }));
+        stack.pop();
+        frames.push(snapshot({ type: 'pop', pos }));
+        return false;
+      }
+      backtrack();
+      return frames;
+    }
+
+    const sFrames = generateSudokuFrames();
+    let sStep = -1;
+    let sAutoTimer = null;
+    const sudokuBoard = document.getElementById('sudokuBoard');
+    const sCells = [];
+    for (let p = 0; p < SN * SN; p++) {
+      const cell = document.createElement('div');
+      cell.className = 'sd-cell';
+      cell.dataset.pos = p;
+      const r = Math.floor(p / SN);
+      const c = p % SN;
+      // Thêm border cho khối 3x3
+      if ((c + 1) % 3 === 0 && c < SN - 1) cell.classList.add('block-border-right');
+      if ((r + 1) % 3 === 0 && r < SN - 1) cell.classList.add('block-border-bottom');
+      sudokuBoard.appendChild(cell);
+      sCells.push(cell);
+    }
+
+    const stackListS = document.getElementById('stackListS');
+    const sCounter = document.getElementById('sCounter');
+    const sPrev = document.getElementById('sPrev'),
+      sNext = document.getElementById('sNext'),
+      sAuto = document.getElementById('sAuto'),
+      sReset = document.getElementById('sReset');
+
+    function renderSudoku() {
+      if (sStep < 0) {
+        sCells.forEach((cell, p) => {
+          const val = SUDOKU_GIVEN[p];
+          cell.className = 'sd-cell';
+          if (val) {
+            cell.classList.add('given');
+            cell.textContent = val;
+          } else {
+            cell.textContent = '';
+          }
+          const r = Math.floor(p / SN);
+          const c = p % SN;
+          if ((c + 1) % 3 === 0 && c < SN - 1) cell.classList.add('block-border-right');
+          if ((r + 1) % 3 === 0 && r < SN - 1) cell.classList.add('block-border-bottom');
+        });
+        stackListS.innerHTML = '<div class="stack-empty">— Chưa bắt đầu —</div>';
+        sCounter.textContent = '0 / ' + sFrames.length;
+        sPrev.disabled = true;
+        document.getElementById('sudokuExplanation').innerHTML =
+          '<strong>🎯 Mục tiêu:</strong> Điền số 1-9 vào bảng 9x9 sao cho <span class="highlight">hàng, cột, khối 3x3</span> không trùng.<br>📌 <strong>Ràng buộc:</strong> <span class="constraint-tag">Global</span> + <span class="constraint-tag">Binary</span> Kiểm tra hàng, cột, khối 3x3.<br>🔍 <strong>Miền giá trị:</strong> {1..9} — hữu hạn, rời rạc.<br>📐 <strong>Tổng số ô:</strong> 81 ô cần điền.';
+        return;
+      }
+      const f = sFrames[sStep];
+
+      sCells.forEach((cell, p) => {
+        const val = f.board[p];
+        const isGiven = SUDOKU_GIVEN[p] !== 0;
+        cell.className = 'sd-cell';
+        if (isGiven && val) {
+          cell.classList.add('given');
+          cell.textContent = val;
+        } else if (val) {
+          cell.classList.add('filled');
+          cell.textContent = val;
+        } else {
+          cell.textContent = '';
+        }
+        const r = Math.floor(p / SN);
+        const c = p % SN;
+        if ((c + 1) % 3 === 0 && c < SN - 1) cell.classList.add('block-border-right');
+        if ((r + 1) % 3 === 0 && r < SN - 1) cell.classList.add('block-border-bottom');
+      });
+
+      if (f.pos !== undefined && (f.type === 'try' || f.type === 'assign' || f.type === 'conflict')) {
+        sCells[f.pos].classList.add(f.type === 'conflict' ? 'conflict' : 'active');
+        if (f.type === 'try' || f.type === 'conflict') {
+          sCells[f.pos].textContent = f.val;
+        }
+      }
+
+      if (f.type === 'conflict' && f.withPos !== undefined) {
+        sCells[f.withPos].classList.add('conflict');
+      }
+
+      let msg = '';
+      const r = f.pos !== undefined ? Math.floor(f.pos / SN) + 1 : '?';
+      const c = f.pos !== undefined ? f.pos % SN + 1 : '?';
+      if (f.type === 'push') {
+        msg = `📌 Xét ô (${r},${c}) (thêm vào stack)`;
+      } else if (f.type === 'try') {
+        msg = `🔢 Thử số <span class="highlight">${f.val}</span> tại ô (${r},${c}) → kiểm tra ràng buộc hàng, cột, khối 3x3`;
+      } else if (f.type === 'assign') {
+        msg = `✅ Điền số <span class="highlight">${f.val}</span> vào ô (${r},${c}) — thỏa mãn tất cả ràng buộc`;
+      } else if (f.type === 'conflict') {
+        const cr = Math.floor(f.withPos / SN) + 1;
+        const cc = f.withPos % SN + 1;
+        msg = `❌ Xung đột! Số <span class="highlight">${f.val}</span> tại ô (${r},${c}) trùng với ô (${cr},${cc}) (${f.conflictType}) → thử số khác`;
+      } else if (f.type === 'backtrack') {
+        msg = `↩️ Quay lui: xóa số ở ô (${r},${c}), thử số khác`;
+      } else if (f.type === 'dead-end') {
+        msg = `🚫 Ô (${r},${c}) không có số phù hợp → quay lui`;
+      } else if (f.type === 'pop') {
+        msg = `📤 Xóa ô (${r},${c}) khỏi stack (quay lui)`;
+      } else if (f.type === 'success') {
+        msg = `🎉 THÀNH CÔNG! Bảng Sudoku 9x9 (81 ô) đã được điền đầy đủ.`;
+      }
+      document.getElementById('sudokuExplanation').innerHTML =
+        `📍 <strong>Bước ${sStep+1}:</strong> ${msg}<br>📚 Stack: [${f.stack.map(p => '('+(Math.floor(p/SN)+1)+','+(p%SN+1)+')').join(' → ')}]`;
+
+      if (f.stack.length === 0) {
+        stackListS.innerHTML = '<div class="stack-empty">— Stack rỗng —</div>';
+      } else {
+        stackListS.innerHTML = '';
+        f.stack.forEach((p, i) => {
+          const div = document.createElement('div');
+          div.className = 'stack-frame' + (i === f.stack.length - 1 ? ' top' : '');
+          div.textContent = '(' + (Math.floor(p / SN) + 1) + ',' + (p % SN + 1) + ')';
+          stackListS.appendChild(div);
+        });
+      }
+      sCounter.textContent = (sStep + 1) + ' / ' + sFrames.length;
+      sPrev.disabled = false;
+    }
+
+    function sGoNext() {
+      if (sStep < sFrames.length - 1) { sStep++;
+        renderSudoku(); } else sStopAuto();
+    }
+
+    function sGoPrev() {
+      if (sStep > -1) { sStep--;
+        renderSudoku(); }
+    }
+
+    function sResetFn() {
+      sStep = -1;
+      sStopAuto();
+      renderSudoku();
+    }
+
+    function sStopAuto() {
+      if (sAutoTimer) { clearInterval(sAutoTimer);
+        sAutoTimer = null;
+        sAuto.textContent = '▶ Tự động'; }
+    }
+
+    function sToggleAuto() {
+      if (sAutoTimer) { sStopAuto(); return; }
+      sAuto.textContent = '⏸ Tạm dừng';
+      sAutoTimer = setInterval(() => {
+        if (sStep >= sFrames.length - 1) { sStopAuto(); return; }
+        sGoNext();
+      }, 400);
+    }
+
+    sNext.addEventListener('click', sGoNext);
+    sPrev.addEventListener('click', sGoPrev);
+    sReset.addEventListener('click', sResetFn);
+    sAuto.addEventListener('click', sToggleAuto);
+    renderSudoku();
   })();
 </script>
 </body>
