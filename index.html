@@ -15,15 +15,15 @@
     --teal: #0f9d8e;
     --amber: #d48c1c;
     --rose: #c94a6b;
+    --violet: #7c3aed;
     --teal-dim: rgba(15, 157, 142, 0.12);
     --amber-dim: rgba(212, 140, 28, 0.12);
     --rose-dim: rgba(201, 74, 107, 0.12);
+    --violet-dim: rgba(124, 58, 237, 0.10);
     --font-mono: 'JetBrains Mono', 'Fira Code', monospace;
   }
 
-  * {
-    box-sizing: border-box;
-  }
+  * { box-sizing: border-box; }
 
   body {
     margin: 0;
@@ -38,75 +38,31 @@
     padding: 30px 24px 60px;
   }
 
-  .header {
-    margin-bottom: 30px;
-  }
-
+  .header { margin-bottom: 30px; }
   .header h1 {
-    font-size: 28px;
-    font-weight: 700;
-    margin: 0 0 8px 0;
-    color: var(--text);
+    font-size: 28px; font-weight: 700; margin: 0 0 8px 0; color: var(--text);
   }
-
-  .header p {
-    color: var(--text-dim);
-    font-size: 14px;
-    margin: 0;
-  }
+  .header p { color: var(--text-dim); font-size: 14px; margin: 0; }
 
   .tabs {
-    display: flex;
-    gap: 12px;
-    margin-bottom: 28px;
-    border-bottom: 2px solid var(--line);
-    padding-bottom: 12px;
-    flex-wrap: wrap;
+    display: flex; gap: 12px; margin-bottom: 28px;
+    border-bottom: 2px solid var(--line); padding-bottom: 12px; flex-wrap: wrap;
   }
 
   .tab {
-    padding: 10px 24px;
-    border-radius: 30px;
-    border: 1px solid transparent;
-    background: transparent;
-    cursor: pointer;
-    font-family: var(--font-mono);
-    font-size: 13px;
-    font-weight: 600;
-    color: var(--text-dim);
-    transition: all 0.2s ease;
+    padding: 10px 24px; border-radius: 30px; border: 1px solid transparent;
+    background: transparent; cursor: pointer; font-family: var(--font-mono);
+    font-size: 13px; font-weight: 600; color: var(--text-dim); transition: all 0.2s ease;
   }
+  .tab:hover { background: var(--teal-dim); color: var(--teal); }
+  .tab.active { background: var(--teal); color: #fff; border-color: var(--teal); box-shadow: 0 4px 12px rgba(15,157,142,0.25); }
 
-  .tab:hover {
-    background: var(--teal-dim);
-    color: var(--teal);
-  }
-
-  .tab.active {
-    background: var(--teal);
-    color: #fff;
-    border-color: var(--teal);
-    box-shadow: 0 4px 12px rgba(15, 157, 142, 0.25);
-  }
-
-  .model {
-    display: none;
-    animation: fadeIn 0.3s ease;
-  }
-
-  .model.active {
-    display: block;
-  }
+  .model { display: none; animation: fadeIn 0.3s ease; }
+  .model.active { display: block; }
 
   @keyframes fadeIn {
-    from {
-      opacity: 0;
-      transform: translateY(10px);
-    }
-    to {
-      opacity: 1;
-      transform: translateY(0);
-    }
+    from { opacity: 0; transform: translateY(10px); }
+    to   { opacity: 1; transform: translateY(0); }
   }
 
   .demo-wrap {
@@ -116,367 +72,218 @@
   }
 
   .panel {
-    background: var(--panel);
-    border: 1px solid var(--line);
-    border-radius: 16px;
-    padding: 20px;
-    box-shadow: 0 4px 16px rgba(0, 20, 60, 0.05);
-    transition: box-shadow 0.2s ease;
+    background: var(--panel); border: 1px solid var(--line); border-radius: 16px;
+    padding: 20px; box-shadow: 0 4px 16px rgba(0,20,60,0.05); transition: box-shadow 0.2s ease;
   }
-
-  .panel:hover {
-    box-shadow: 0 8px 24px rgba(0, 20, 60, 0.08);
-  }
+  .panel:hover { box-shadow: 0 8px 24px rgba(0,20,60,0.08); }
 
   .panel-title {
-    font-size: 12px;
-    font-weight: 700;
-    color: var(--text-dim);
-    letter-spacing: 0.5px;
-    text-transform: uppercase;
-    margin-bottom: 14px;
-    display: flex;
-    align-items: center;
-    gap: 10px;
+    font-size: 12px; font-weight: 700; color: var(--text-dim);
+    letter-spacing: 0.5px; text-transform: uppercase; margin-bottom: 14px;
+    display: flex; align-items: center; gap: 10px;
   }
-
   .panel-title .badge {
-    background: var(--teal);
-    color: #fff;
-    padding: 2px 12px;
-    border-radius: 30px;
-    font-size: 9px;
-    text-transform: none;
+    background: var(--teal); color: #fff; padding: 2px 12px;
+    border-radius: 30px; font-size: 9px; text-transform: none;
+  }
+  .panel-title .badge-violet {
+    background: var(--violet); color: #fff; padding: 2px 12px;
+    border-radius: 30px; font-size: 9px; text-transform: none;
   }
 
-  svg {
-    width: 100%;
-    height: auto;
-    display: block;
-    border-radius: 12px;
-  }
+  svg { width: 100%; height: auto; display: block; border-radius: 12px; }
 
-  .node-circle {
-    transition: fill 0.3s ease, stroke 0.3s ease, filter 0.3s ease;
-  }
+  .node-circle { transition: fill 0.3s ease, stroke 0.3s ease, filter 0.3s ease; }
 
-  /* Stack */
   .stack-list {
-    display: flex;
-    flex-direction: column-reverse;
-    gap: 6px;
-    min-height: 200px;
-    max-height: 350px;
-    overflow-y: auto;
-    padding-right: 4px;
+    display: flex; flex-direction: column-reverse; gap: 6px;
+    min-height: 200px; max-height: 350px; overflow-y: auto; padding-right: 4px;
   }
-
-  .stack-list::-webkit-scrollbar {
-    width: 4px;
-  }
-
-  .stack-list::-webkit-scrollbar-thumb {
-    background: var(--line-strong);
-    border-radius: 10px;
-  }
+  .stack-list::-webkit-scrollbar { width: 4px; }
+  .stack-list::-webkit-scrollbar-thumb { background: var(--line-strong); border-radius: 10px; }
 
   .stack-frame {
-    font-size: 12px;
-    padding: 8px 12px;
-    border-radius: 8px;
-    background: #f0f5ff;
-    border: 1px solid var(--line-strong);
-    color: var(--text-dim);
-    transition: all 0.2s ease;
+    font-size: 12px; padding: 8px 12px; border-radius: 8px;
+    background: #f0f5ff; border: 1px solid var(--line-strong);
+    color: var(--text-dim); transition: all 0.2s ease;
   }
-
   .stack-frame.top {
-    color: var(--text);
-    border-color: var(--amber);
-    background: var(--amber-dim);
-    font-weight: 600;
+    color: var(--text); border-color: var(--amber);
+    background: var(--amber-dim); font-weight: 600;
   }
-
   .stack-empty {
-    color: var(--text-dim);
-    font-size: 12px;
-    padding: 12px 6px;
-    text-align: center;
-    background: #f8faff;
-    border-radius: 8px;
-    border: 1px dashed var(--line);
+    color: var(--text-dim); font-size: 12px; padding: 12px 6px; text-align: center;
+    background: #f8faff; border-radius: 8px; border: 1px dashed var(--line);
   }
 
-  /* Controls */
   .controls {
-    display: flex;
-    gap: 8px;
-    margin-top: 16px;
-    align-items: center;
-    flex-wrap: wrap;
-    padding-top: 14px;
-    border-top: 1px solid var(--line);
+    display: flex; gap: 8px; margin-top: 16px; align-items: center;
+    flex-wrap: wrap; padding-top: 14px; border-top: 1px solid var(--line);
   }
 
   .btn {
-    font-family: var(--font-mono);
-    font-size: 12px;
-    font-weight: 500;
-    padding: 8px 16px;
-    border-radius: 30px;
-    border: 1px solid var(--line-strong);
-    background: var(--panel);
-    color: var(--text);
-    cursor: pointer;
-    transition: all 0.2s ease;
-    display: inline-flex;
-    align-items: center;
-    gap: 4px;
+    font-family: var(--font-mono); font-size: 12px; font-weight: 500;
+    padding: 8px 16px; border-radius: 30px; border: 1px solid var(--line-strong);
+    background: var(--panel); color: var(--text); cursor: pointer;
+    transition: all 0.2s ease; display: inline-flex; align-items: center; gap: 4px;
   }
-
   .btn:hover:not(:disabled) {
-    border-color: var(--teal);
-    color: var(--teal);
-    background: var(--teal-dim);
-    transform: translateY(-1px);
+    border-color: var(--teal); color: var(--teal);
+    background: var(--teal-dim); transform: translateY(-1px);
   }
-
   .btn.primary {
-    background: var(--teal);
-    color: #fff;
-    border-color: var(--teal);
+    background: var(--teal); color: #fff; border-color: var(--teal);
   }
-
   .btn.primary:hover:not(:disabled) {
-    background: #0d8a7d;
-    border-color: #0d8a7d;
-    color: #fff;
+    background: #0d8a7d; border-color: #0d8a7d; color: #fff;
   }
-
-  .btn:disabled {
-    opacity: 0.4;
-    cursor: not-allowed;
-    transform: none !important;
+  .btn.solution-btn {
+    background: var(--violet); color: #fff; border-color: var(--violet);
+    font-weight: 600;
   }
+  .btn.solution-btn:hover:not(:disabled) {
+    background: #6d28d9; border-color: #6d28d9; color: #fff;
+  }
+  .btn.solution-btn.active-sol {
+    background: #6d28d9; border-color: #6d28d9;
+    box-shadow: 0 0 0 3px rgba(124,58,237,0.3);
+  }
+  .btn:disabled { opacity: 0.4; cursor: not-allowed; transform: none !important; }
 
   .step-counter {
-    margin-left: auto;
-    font-size: 12px;
-    color: var(--text-dim);
-    background: var(--bg);
-    padding: 4px 14px;
-    border-radius: 30px;
+    margin-left: auto; font-size: 12px; color: var(--text-dim);
+    background: var(--bg); padding: 4px 14px; border-radius: 30px;
   }
 
-  /* Explanation panel */
   .explanation-box {
-    margin-top: 16px;
-    padding: 16px 20px;
-    background: #f8faff;
-    border-radius: 12px;
-    border-left: 4px solid var(--teal);
-    font-size: 13px;
-    line-height: 1.7;
-    color: var(--text);
+    margin-top: 16px; padding: 16px 20px; background: #f8faff;
+    border-radius: 12px; border-left: 4px solid var(--teal);
+    font-size: 13px; line-height: 1.7; color: var(--text);
   }
-
-  .explanation-box strong {
-    color: var(--teal);
-  }
-
+  .explanation-box strong { color: var(--teal); }
   .explanation-box .highlight {
-    background: var(--amber-dim);
-    padding: 2px 10px;
-    border-radius: 12px;
-    font-weight: 600;
-    color: var(--amber);
+    background: var(--amber-dim); padding: 2px 10px;
+    border-radius: 12px; font-weight: 600; color: var(--amber);
+  }
+  .explanation-box .constraint-tag {
+    display: inline-block; background: var(--teal-dim); color: var(--teal);
+    padding: 2px 10px; border-radius: 12px; font-size: 11px; font-weight: 600; margin-right: 4px;
+  }
+  .explanation-box.row0-mode {
+    border-left-color: var(--violet);
+  }
+  .explanation-box.row0-mode strong {
+    color: var(--violet);
   }
 
-  .explanation-box .constraint-tag {
-    display: inline-block;
-    background: var(--teal-dim);
-    color: var(--teal);
-    padding: 2px 10px;
-    border-radius: 12px;
-    font-size: 11px;
-    font-weight: 600;
-    margin-right: 4px;
+  /* Row-0 highlight strip */
+  .row0-badge {
+    display: inline-block; background: var(--violet); color: #fff;
+    padding: 2px 12px; border-radius: 30px; font-size: 10px; font-weight: 700;
+    margin-left: 8px; vertical-align: middle;
   }
 
   /* N-Queens Board */
   .queens-board {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: 3px;
-    max-width: 320px;
-    margin: 0 auto;
-    background: var(--line-strong);
-    padding: 3px;
-    border-radius: 10px;
+    display: grid; grid-template-columns: repeat(4, 1fr); gap: 3px;
+    max-width: 320px; margin: 0 auto; background: var(--line-strong);
+    padding: 3px; border-radius: 10px;
   }
-
   .q-cell {
-    aspect-ratio: 1;
-    background: #f4f8ff;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 28px;
-    font-weight: 700;
-    border-radius: 4px;
-    transition: all 0.2s ease;
-    color: var(--text);
+    aspect-ratio: 1; background: #f4f8ff; display: flex; align-items: center;
+    justify-content: center; font-size: 28px; font-weight: 700; border-radius: 4px;
+    transition: all 0.2s ease; color: var(--text);
   }
-
-  .q-cell.active {
-    background: var(--amber-dim);
-    color: var(--amber);
-    box-shadow: 0 0 0 2px var(--amber) inset;
-    transform: scale(1.05);
-  }
-
-  .q-cell.conflict {
-    background: var(--rose-dim);
-    color: var(--rose);
-    box-shadow: 0 0 0 2px var(--rose) inset;
-    animation: shake 0.3s ease;
-  }
-
-  .q-cell.queen {
-    background: var(--teal-dim);
-    color: var(--teal);
-  }
+  .q-cell.active { background: var(--amber-dim); color: var(--amber); box-shadow: 0 0 0 2px var(--amber) inset; transform: scale(1.05); }
+  .q-cell.conflict { background: var(--rose-dim); color: var(--rose); box-shadow: 0 0 0 2px var(--rose) inset; animation: shake 0.3s ease; }
+  .q-cell.queen { background: var(--teal-dim); color: var(--teal); }
 
   /* Sudoku Board 9x9 */
   .sudoku-board {
-    display: grid;
-    grid-template-columns: repeat(9, 1fr);
-    gap: 2px;
-    max-width: 450px;
-    margin: 0 auto;
-    background: var(--line-strong);
-    padding: 2px;
-    border-radius: 8px;
+    display: grid; grid-template-columns: repeat(9, 1fr); gap: 2px;
+    max-width: 450px; margin: 0 auto; background: var(--line-strong);
+    padding: 2px; border-radius: 8px;
   }
 
-  /* Border cho khối 3x3 */
   .sd-cell {
-    aspect-ratio: 1;
-    background: #f4f8ff;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 18px;
-    font-weight: 600;
-    border-radius: 3px;
-    transition: all 0.2s ease;
-    color: var(--text);
-    position: relative;
+    aspect-ratio: 1; background: #f4f8ff; display: flex; align-items: center;
+    justify-content: center; font-size: 18px; font-weight: 600; border-radius: 3px;
+    transition: all 0.2s ease; color: var(--text); position: relative;
   }
+  .sd-cell.block-border-right  { border-right: 2.5px solid var(--text-dim); }
+  .sd-cell.block-border-bottom { border-bottom: 2.5px solid var(--text-dim); }
 
-  /* Đường viền khối 3x3 */
-  .sd-cell.block-border-right {
-    border-right: 2.5px solid var(--text-dim);
-  }
-  .sd-cell.block-border-bottom {
-    border-bottom: 2.5px solid var(--text-dim);
-  }
+  .sd-cell.active   { background: var(--amber-dim); color: var(--amber); box-shadow: 0 0 0 2px var(--amber) inset; transform: scale(1.05); z-index: 2; }
+  .sd-cell.conflict { background: var(--rose-dim);  color: var(--rose);  box-shadow: 0 0 0 2px var(--rose)  inset; animation: shake 0.3s ease; z-index: 2; }
+  .sd-cell.filled   { background: var(--teal-dim);  color: var(--teal); }
+  .sd-cell.given    { background: #e8edf5; color: var(--text); font-weight: 700; }
 
-  .sd-cell.active {
-    background: var(--amber-dim);
-    color: var(--amber);
-    box-shadow: 0 0 0 2px var(--amber) inset;
-    transform: scale(1.05);
-    z-index: 2;
-  }
+  /* Row-0 cell styles */
+  .sd-cell.row0-highlight { outline: 2px solid rgba(124,58,237,0.35); outline-offset: -1px; }
+  .sd-cell.row0-placed    { background: var(--violet-dim); color: var(--violet); font-weight: 700; }
+  .sd-cell.row0-try       { background: rgba(124,58,237,0.18); color: var(--violet); box-shadow: 0 0 0 2px var(--violet) inset; transform: scale(1.07); z-index: 3; }
+  .sd-cell.row0-conflict  { background: var(--rose-dim); color: var(--rose); box-shadow: 0 0 0 2px var(--rose) inset; animation: shake 0.3s ease; z-index: 3; }
+  .sd-cell.row0-ok        { background: rgba(15,157,142,0.18); color: var(--teal); box-shadow: 0 0 0 2px var(--teal) inset; z-index: 3; }
 
-  .sd-cell.conflict {
-    background: var(--rose-dim);
-    color: var(--rose);
-    box-shadow: 0 0 0 2px var(--rose) inset;
-    animation: shake 0.3s ease;
-    z-index: 2;
+  /* Solution board */
+  .solution-section {
+    margin-top: 24px; padding: 20px; background: var(--panel);
+    border: 2px solid var(--violet); border-radius: 16px;
+    box-shadow: 0 4px 20px rgba(124,58,237,0.12);
+    animation: fadeIn 0.3s ease;
   }
+  .solution-section .panel-title { margin-bottom: 16px; }
 
-  .sd-cell.filled {
-    background: var(--teal-dim);
-    color: var(--teal);
+  .solution-board {
+    display: grid; grid-template-columns: repeat(9, 1fr); gap: 2px;
+    max-width: 450px; margin: 0 auto; background: var(--line-strong);
+    padding: 2px; border-radius: 8px;
   }
+  .sol-cell {
+    aspect-ratio: 1; display: flex; align-items: center; justify-content: center;
+    font-size: 18px; font-weight: 600; border-radius: 3px;
+    transition: background 0.3s ease, color 0.3s ease;
+  }
+  .sol-cell.block-border-right  { border-right: 2.5px solid var(--text-dim); }
+  .sol-cell.block-border-bottom { border-bottom: 2.5px solid var(--text-dim); }
+  .sol-cell.sol-given   { background: #e8edf5; color: var(--text); }
+  .sol-cell.sol-filled  { background: var(--violet-dim); color: var(--violet); animation: popIn 0.2s ease; }
+  .sol-cell.sol-empty   { background: #f4f8ff; color: transparent; }
 
-  .sd-cell.given {
-    background: #e8edf5;
-    color: var(--text);
-    font-weight: 700;
+  @keyframes popIn {
+    from { transform: scale(0.7); opacity: 0; }
+    to   { transform: scale(1);   opacity: 1; }
   }
 
   @keyframes shake {
-    0%, 100% { transform: translateX(0); }
-    25% { transform: translateX(-4px); }
-    75% { transform: translateX(4px); }
+    0%,100% { transform: translateX(0); }
+    25%      { transform: translateX(-4px); }
+    75%      { transform: translateX(4px); }
   }
 
   .legend {
-    display: flex;
-    gap: 18px;
-    margin-top: 14px;
-    flex-wrap: wrap;
-    justify-content: center;
+    display: flex; gap: 18px; margin-top: 14px; flex-wrap: wrap; justify-content: center;
   }
+  .legend span { font-size: 11px; color: var(--text-dim); display: flex; align-items: center; gap: 6px; }
+  .legend i { width: 12px; height: 12px; border-radius: 50%; display: inline-block; border: 1px solid rgba(0,0,0,0.05); }
 
-  .legend span {
-    font-size: 11px;
-    color: var(--text-dim);
-    display: flex;
-    align-items: center;
-    gap: 6px;
-  }
+  .knowledge-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-top: 12px; }
+  .knowledge-card { background: #f8faff; padding: 12px 16px; border-radius: 10px; border: 1px solid var(--line); font-size: 12px; line-height: 1.6; }
+  .knowledge-card .label { font-weight: 700; color: var(--teal); font-size: 11px; text-transform: uppercase; letter-spacing: 0.3px; }
 
-  .legend i {
-    width: 12px;
-    height: 12px;
-    border-radius: 50%;
-    display: inline-block;
-    border: 1px solid rgba(0, 0, 0, 0.05);
+  /* Row-0 step explanation strip */
+  .row0-steps {
+    margin-top: 14px; background: var(--violet-dim); border-radius: 10px;
+    border: 1px solid rgba(124,58,237,0.2); padding: 12px 16px; font-size: 12px; line-height: 1.8;
+    color: var(--text);
   }
-
-  /* Knowledge base */
-  .knowledge-grid {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 12px;
-    margin-top: 12px;
-  }
-
-  .knowledge-card {
-    background: #f8faff;
-    padding: 12px 16px;
-    border-radius: 10px;
-    border: 1px solid var(--line);
-    font-size: 12px;
-    line-height: 1.6;
-  }
-
-  .knowledge-card .label {
-    font-weight: 700;
-    color: var(--teal);
-    font-size: 11px;
-    text-transform: uppercase;
-    letter-spacing: 0.3px;
-  }
+  .row0-steps .title { font-weight: 700; color: var(--violet); font-size: 11px; text-transform: uppercase; margin-bottom: 6px; }
 
   @media (max-width: 850px) {
-    .demo-wrap {
-      grid-template-columns: 1fr;
-    }
-    .knowledge-grid {
-      grid-template-columns: 1fr;
-    }
-    .sudoku-board {
-      max-width: 340px;
-    }
-    .sd-cell {
-      font-size: 14px;
-    }
+    .demo-wrap { grid-template-columns: 1fr; }
+    .knowledge-grid { grid-template-columns: 1fr; }
+    .sudoku-board, .solution-board { max-width: 340px; }
+    .sd-cell, .sol-cell { font-size: 14px; }
   }
 </style>
 </head>
@@ -588,13 +395,17 @@
   <div class="model" id="m3">
     <div class="demo-wrap">
       <div class="panel">
-        <div class="panel-title">🧩 Sudoku 9x9 <span class="badge">81 ô</span></div>
+        <div class="panel-title">
+          🧩 Sudoku 9x9 <span class="badge">81 ô</span>
+          <span id="row0BadgeMain" class="row0-badge" style="display:none">🔍 Đang xét Hàng 1</span>
+        </div>
         <div class="sudoku-board" id="sudokuBoard"></div>
         <div class="legend">
           <span><i style="background:var(--teal)"></i> Đã điền</span>
           <span><i style="background:var(--amber)"></i> Đang thử</span>
           <span><i style="background:var(--rose)"></i> Xung đột</span>
           <span><i style="background:#e8edf5;border:1px solid #ccc;"></i> Cho sẵn</span>
+          <span><i style="background:var(--violet-dim);border:1px solid rgba(124,58,237,0.3)"></i> Hàng 1 (giải thích)</span>
         </div>
       </div>
       <div class="panel">
@@ -606,17 +417,37 @@
           <br>🔍 <strong>Miền giá trị:</strong> {1,2,3,4,5,6,7,8,9} — hữu hạn, rời rạc.
           <br>📐 <strong>Tổng số ô:</strong> 81 ô cần điền.
         </div>
+        <!-- Row-0 detailed steps box -->
+        <div class="row0-steps" id="row0Steps" style="display:none">
+          <div class="title">🔍 Giải thích chi tiết — Hàng 1 (Row 0)</div>
+          <div id="row0StepsContent"></div>
+        </div>
       </div>
     </div>
+
     <div class="panel">
       <div class="controls">
         <button class="btn" id="sPrev">◀ Lùi</button>
         <button class="btn primary" id="sNext">Tiến ▶</button>
         <button class="btn" id="sAuto">▶ Tự động</button>
         <button class="btn" id="sReset">⟳ Làm lại</button>
+        <button class="btn solution-btn" id="sShowSolution">✨ Hiển thị đáp án</button>
         <span class="step-counter" id="sCounter">0 / 0</span>
       </div>
     </div>
+
+    <!-- Solution display section (hidden by default) -->
+    <div class="solution-section" id="solutionSection" style="display:none">
+      <div class="panel-title">
+        ✨ Đáp án hoàn chỉnh <span class="badge-violet">Show Solution</span>
+      </div>
+      <div class="solution-board" id="solutionBoard"></div>
+      <div class="legend" style="margin-top:12px">
+        <span><i style="background:#e8edf5;border:1px solid #ccc;"></i> Số cho sẵn</span>
+        <span><i style="background:var(--violet-dim);border:1px solid rgba(124,58,237,0.3)"></i> Số được giải</span>
+      </div>
+    </div>
+
     <div class="knowledge-grid">
       <div class="knowledge-card">
         <div class="label">🔹 Ràng buộc</div>
@@ -633,716 +464,667 @@
 </div>
 
 <script>
-  (function() {
-    // Tabs
-    document.querySelectorAll('.tab').forEach(t => {
-      t.addEventListener('click', () => {
-        document.querySelectorAll('.tab').forEach(x => x.classList.remove('active'));
-        document.querySelectorAll('.model').forEach(x => x.classList.remove('active'));
-        t.classList.add('active');
-        document.getElementById(t.dataset.target).classList.add('active');
-        if (t.dataset.target === 'm1') { gStopAuto(); } 
-        else if (t.dataset.target === 'm2') { qStopAuto(); }
-        else { sStopAuto(); }
-      });
+(function() {
+  /* ============ TABS ============ */
+  document.querySelectorAll('.tab').forEach(t => {
+    t.addEventListener('click', () => {
+      document.querySelectorAll('.tab').forEach(x => x.classList.remove('active'));
+      document.querySelectorAll('.model').forEach(x => x.classList.remove('active'));
+      t.classList.add('active');
+      document.getElementById(t.dataset.target).classList.add('active');
+      if (t.dataset.target === 'm1') gStopAuto();
+      else if (t.dataset.target === 'm2') qStopAuto();
+      else sStopAuto();
     });
+  });
 
-    /* ============ MODEL 1: MAP COLORING ============ */
-    const NODES = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H'];
-    const EDGES = [
-      ['A', 'B'], ['A', 'C'], ['A', 'D'],
-      ['B', 'C'], ['B', 'E'],
-      ['C', 'D'], ['C', 'F'],
-      ['D', 'F'], ['D', 'G'],
-      ['E', 'F'],
-      ['F', 'G'], ['F', 'H'],
-      ['G', 'H']
-    ];
-    const COLOR_HEX = { teal: '#0f9d8e', amber: '#d48c1c', rose: '#c94a6b' };
-    const COLORS = ['teal', 'amber', 'rose'];
-    const POS = {
-      A: [260, 64], D: [430, 132],
-      B: [118, 190], C: [268, 232],
-      G: [440, 344], E: [96, 364],
-      F: [228, 404], H: [280, 502]
-    };
-    const adj = {};
-    NODES.forEach(n => adj[n] = []);
-    EDGES.forEach(([a, b]) => { adj[a].push(b);
-      adj[b].push(a); });
+  /* ============ MODEL 1: MAP COLORING ============ */
+  const NODES = ['A','B','C','D','E','F','G','H'];
+  const EDGES = [
+    ['A','B'],['A','C'],['A','D'],
+    ['B','C'],['B','E'],
+    ['C','D'],['C','F'],
+    ['D','F'],['D','G'],
+    ['E','F'],
+    ['F','G'],['F','H'],
+    ['G','H']
+  ];
+  const COLOR_HEX = { teal: '#0f9d8e', amber: '#d48c1c', rose: '#c94a6b' };
+  const COLORS = ['teal','amber','rose'];
+  const POS = {
+    A:[260,64], D:[430,132],
+    B:[118,190], C:[268,232],
+    G:[440,344], E:[96,364],
+    F:[228,404], H:[280,502]
+  };
+  const adj = {};
+  NODES.forEach(n => adj[n] = []);
+  EDGES.forEach(([a,b]) => { adj[a].push(b); adj[b].push(a); });
 
-    function generateGraphFrames() {
-      const frames = [];
-      const assignment = {};
-      const stack = [];
-
-      function snapshot(extra) {
-        return Object.assign({ assignment: { ...assignment }, stack: [...stack] }, extra);
+  function generateGraphFrames() {
+    const frames = [];
+    const assignment = {};
+    const stack = [];
+    function snapshot(extra) { return Object.assign({ assignment: {...assignment}, stack: [...stack] }, extra); }
+    function backtrack(idx) {
+      if (idx === NODES.length) { frames.push(snapshot({ type: 'success' })); return true; }
+      const node = NODES[idx];
+      stack.push(node);
+      frames.push(snapshot({ type: 'push', node }));
+      for (const color of COLORS) {
+        frames.push(snapshot({ type: 'try', node, color }));
+        let conflict = null;
+        for (const nb of adj[node]) { if (assignment[nb] === color) { conflict = nb; break; } }
+        if (conflict) { frames.push(snapshot({ type: 'conflict', node, color, withNode: conflict })); continue; }
+        assignment[node] = color;
+        frames.push(snapshot({ type: 'assign', node, color }));
+        if (backtrack(idx + 1)) return true;
+        delete assignment[node];
+        frames.push(snapshot({ type: 'backtrack', node }));
       }
-
-      function backtrack(idx) {
-        if (idx === NODES.length) {
-          frames.push(snapshot({ type: 'success' }));
-          return true;
-        }
-        const node = NODES[idx];
-        stack.push(node);
-        frames.push(snapshot({ type: 'push', node }));
-        for (const color of COLORS) {
-          frames.push(snapshot({ type: 'try', node, color }));
-          let conflict = null;
-          for (const nb of adj[node]) {
-            if (assignment[nb] === color) { conflict = nb; break; }
-          }
-          if (conflict) {
-            frames.push(snapshot({ type: 'conflict', node, color, withNode: conflict }));
-            continue;
-          }
-          assignment[node] = color;
-          frames.push(snapshot({ type: 'assign', node, color }));
-          if (backtrack(idx + 1)) return true;
-          delete assignment[node];
-          frames.push(snapshot({ type: 'backtrack', node }));
-        }
-        frames.push(snapshot({ type: 'dead-end', node }));
-        stack.pop();
-        frames.push(snapshot({ type: 'pop', node }));
-        return false;
-      }
-      backtrack(0);
-      return frames;
+      frames.push(snapshot({ type: 'dead-end', node }));
+      stack.pop();
+      frames.push(snapshot({ type: 'pop', node }));
+      return false;
     }
+    backtrack(0);
+    return frames;
+  }
 
-    const gFrames = generateGraphFrames();
-    let gStep = -1;
-    let gAutoTimer = null;
-    const svg = document.getElementById('graphSvg');
-    const svgns = 'http://www.w3.org/2000/svg';
+  const gFrames = generateGraphFrames();
+  let gStep = -1, gAutoTimer = null;
+  const svg = document.getElementById('graphSvg');
+  const svgns = 'http://www.w3.org/2000/svg';
 
-    EDGES.forEach(([a, b]) => {
-      const [x1, y1] = POS[a],
-        [x2, y2] = POS[b];
-      const line = document.createElementNS(svgns, 'line');
-      line.setAttribute('x1', x1);
-      line.setAttribute('y1', y1);
-      line.setAttribute('x2', x2);
-      line.setAttribute('y2', y2);
-      line.setAttribute('stroke', '#b8c8e8');
-      line.setAttribute('stroke-width', '2.2');
-      line.dataset.a = a;
-      line.dataset.b = b;
-      svg.appendChild(line);
-    });
+  EDGES.forEach(([a,b]) => {
+    const [x1,y1]=POS[a],[x2,y2]=POS[b];
+    const line = document.createElementNS(svgns,'line');
+    line.setAttribute('x1',x1); line.setAttribute('y1',y1);
+    line.setAttribute('x2',x2); line.setAttribute('y2',y2);
+    line.setAttribute('stroke','#b8c8e8'); line.setAttribute('stroke-width','2.2');
+    line.dataset.a=a; line.dataset.b=b;
+    svg.appendChild(line);
+  });
 
-    const nodeCircles = {},
-      nodeLabels = {};
-    NODES.forEach(n => {
-      const [x, y] = POS[n];
-      const c = document.createElementNS(svgns, 'circle');
-      c.setAttribute('cx', x);
-      c.setAttribute('cy', y);
-      c.setAttribute('r', 28);
-      c.classList.add('node-circle');
-      c.setAttribute('fill', 'transparent');
-      c.setAttribute('stroke', 'rgba(0,20,60,0.20)');
-      c.setAttribute('stroke-width', '2');
-      c.setAttribute('stroke-dasharray', '4 3');
-      svg.appendChild(c);
-      nodeCircles[n] = c;
-      const t = document.createElementNS(svgns, 'text');
-      t.setAttribute('x', x);
-      t.setAttribute('y', y + 5);
-      t.setAttribute('text-anchor', 'middle');
-      t.setAttribute('font-family', 'JetBrains Mono, monospace');
-      t.setAttribute('font-weight', '700');
-      t.setAttribute('font-size', '16');
-      t.setAttribute('fill', '#6b7da0');
-      t.textContent = n;
-      svg.appendChild(t);
-      nodeLabels[n] = t;
-    });
+  const nodeCircles={}, nodeLabels={};
+  NODES.forEach(n => {
+    const [x,y]=POS[n];
+    const c=document.createElementNS(svgns,'circle');
+    c.setAttribute('cx',x); c.setAttribute('cy',y); c.setAttribute('r',28);
+    c.classList.add('node-circle');
+    c.setAttribute('fill','transparent'); c.setAttribute('stroke','rgba(0,20,60,0.20)');
+    c.setAttribute('stroke-width','2'); c.setAttribute('stroke-dasharray','4 3');
+    svg.appendChild(c); nodeCircles[n]=c;
+    const t=document.createElementNS(svgns,'text');
+    t.setAttribute('x',x); t.setAttribute('y',y+5); t.setAttribute('text-anchor','middle');
+    t.setAttribute('font-family','JetBrains Mono, monospace'); t.setAttribute('font-weight','700');
+    t.setAttribute('font-size','16'); t.setAttribute('fill','#6b7da0'); t.textContent=n;
+    svg.appendChild(t); nodeLabels[n]=t;
+  });
 
-    const stackListG = document.getElementById('stackListG');
-    const gCounter = document.getElementById('gCounter');
-    const gPrev = document.getElementById('gPrev'),
-      gNext = document.getElementById('gNext'),
-      gAuto = document.getElementById('gAuto'),
-      gReset = document.getElementById('gReset');
+  const stackListG=document.getElementById('stackListG');
+  const gCounter=document.getElementById('gCounter');
+  const gPrev=document.getElementById('gPrev'), gNext=document.getElementById('gNext'),
+        gAuto=document.getElementById('gAuto'), gReset=document.getElementById('gReset');
 
-    function renderGraph() {
-      if (gStep < 0) {
-        NODES.forEach(n => {
-          nodeCircles[n].setAttribute('fill', 'transparent');
-          nodeCircles[n].setAttribute('stroke', 'rgba(0,20,60,0.20)');
-          nodeCircles[n].setAttribute('stroke-dasharray', '4 3');
-          nodeCircles[n].removeAttribute('filter');
-          nodeLabels[n].setAttribute('fill', '#6b7da0');
-        });
-        document.querySelectorAll('#graphSvg line').forEach(l => {
-          l.setAttribute('stroke', '#b8c8e8');
-          l.setAttribute('stroke-width', '2.2');
-        });
-        stackListG.innerHTML = '<div class="stack-empty">— Chưa bắt đầu —</div>';
-        gCounter.textContent = '0 / ' + gFrames.length;
-        gPrev.disabled = true;
-        document.getElementById('graphExplanation').innerHTML =
-          '<strong>🎯 Mục tiêu:</strong> Tô màu 8 đỉnh sao cho <span class="highlight">không có 2 đỉnh kề nhau</span> cùng màu.<br>📌 <strong>Ràng buộc:</strong> <span class="constraint-tag">Binary</span> Mỗi cạnh là 1 ràng buộc giữa 2 biến.<br>🔍 <strong>Miền giá trị:</strong> {teal, amber, rose} — hữu hạn, rời rạc.';
-        return;
-      }
-      const f = gFrames[gStep];
+  function renderGraph() {
+    if (gStep < 0) {
       NODES.forEach(n => {
-        const val = f.assignment[n];
-        if (val) {
-          nodeCircles[n].setAttribute('fill', COLOR_HEX[val]);
-          nodeCircles[n].setAttribute('stroke', 'transparent');
-          nodeCircles[n].removeAttribute('stroke-dasharray');
-          nodeLabels[n].setAttribute('fill', '#fff');
-        } else {
-          nodeCircles[n].setAttribute('fill', 'transparent');
-          nodeCircles[n].setAttribute('stroke', 'rgba(0,20,60,0.20)');
-          nodeCircles[n].setAttribute('stroke-dasharray', '4 3');
-          nodeLabels[n].setAttribute('fill', '#6b7da0');
-        }
+        nodeCircles[n].setAttribute('fill','transparent');
+        nodeCircles[n].setAttribute('stroke','rgba(0,20,60,0.20)');
+        nodeCircles[n].setAttribute('stroke-dasharray','4 3');
         nodeCircles[n].removeAttribute('filter');
+        nodeLabels[n].setAttribute('fill','#6b7da0');
       });
-
-      if (f.node && (f.type === 'try' || f.type === 'assign' || f.type === 'conflict')) {
-        const c = nodeCircles[f.node];
-        c.setAttribute('filter', 'drop-shadow(0 0 10px ' + (f.type === 'conflict' ? '#c94a6b' : (f.type === 'assign' ? '#0f9d8e' : '#d48c1c')) + ')');
-        if (f.type !== 'assign' && !f.assignment[f.node]) {
-          c.setAttribute('stroke', f.type === 'conflict' ? '#c94a6b' : '#d48c1c');
-          c.setAttribute('stroke-width', '3');
-        }
-      }
-
       document.querySelectorAll('#graphSvg line').forEach(l => {
-        const a = l.dataset.a,
-          b = l.dataset.b;
-        if (f.type === 'conflict' && ((a === f.node && b === f.withNode) || (b === f.node && a === f.withNode))) {
-          l.setAttribute('stroke', '#c94a6b');
-          l.setAttribute('stroke-width', '3.5');
-        } else {
-          l.setAttribute('stroke', '#b8c8e8');
-          l.setAttribute('stroke-width', '2.2');
-        }
+        l.setAttribute('stroke','#b8c8e8'); l.setAttribute('stroke-width','2.2');
       });
-
-      let msg = '';
-      if (f.type === 'push') {
-        msg = `📌 Xét đỉnh <strong>${f.node}</strong> (thêm vào stack)`;
-      } else if (f.type === 'try') {
-        msg = `🎨 Thử màu <span class="highlight">${f.color}</span> cho đỉnh <strong>${f.node}</strong> → kiểm tra ràng buộc Binary với các đỉnh kề`;
-      } else if (f.type === 'assign') {
-        msg = `✅ Gán màu <span class="highlight">${f.color}</span> cho đỉnh <strong>${f.node}</strong> (thỏa mãn tất cả ràng buộc)`;
-      } else if (f.type === 'conflict') {
-        msg = `❌ Xung đột Binary! Đỉnh <strong>${f.withNode}</strong> đã có màu <span class="highlight">${f.color}</span> → không thể gán, thử màu khác`;
-      } else if (f.type === 'backtrack') {
-        msg = `↩️ Quay lui: bỏ gán màu của đỉnh <strong>${f.node}</strong>, thử phương án khác`;
-      } else if (f.type === 'dead-end') {
-        msg = `🚫 Đỉnh <strong>${f.node}</strong> không có màu phù hợp → quay lui`;
-      } else if (f.type === 'pop') {
-        msg = `📤 Xóa đỉnh <strong>${f.node}</strong> khỏi stack (quay lui)`;
-      } else if (f.type === 'success') {
-        msg = `🎉 THÀNH CÔNG! Tất cả đỉnh đã được tô màu hợp lệ.`;
-      }
+      stackListG.innerHTML = '<div class="stack-empty">— Chưa bắt đầu —</div>';
+      gCounter.textContent = '0 / ' + gFrames.length;
+      gPrev.disabled = true;
       document.getElementById('graphExplanation').innerHTML =
-        `📍 <strong>Bước ${gStep+1}:</strong> ${msg}<br>📚 Stack: [${f.stack.join(' → ')}]`;
-
-      if (f.stack.length === 0) {
-        stackListG.innerHTML = '<div class="stack-empty">— Stack rỗng —</div>';
+        '<strong>🎯 Mục tiêu:</strong> Tô màu 8 đỉnh sao cho <span class="highlight">không có 2 đỉnh kề nhau</span> cùng màu.<br>📌 <strong>Ràng buộc:</strong> <span class="constraint-tag">Binary</span> Mỗi cạnh là 1 ràng buộc giữa 2 biến.<br>🔍 <strong>Miền giá trị:</strong> {teal, amber, rose} — hữu hạn, rời rạc.';
+      return;
+    }
+    const f = gFrames[gStep];
+    NODES.forEach(n => {
+      const val=f.assignment[n];
+      if (val) {
+        nodeCircles[n].setAttribute('fill',COLOR_HEX[val]);
+        nodeCircles[n].setAttribute('stroke','transparent');
+        nodeCircles[n].removeAttribute('stroke-dasharray');
+        nodeLabels[n].setAttribute('fill','#fff');
       } else {
-        stackListG.innerHTML = '';
-        f.stack.forEach((n, i) => {
-          const div = document.createElement('div');
-          div.className = 'stack-frame' + (i === f.stack.length - 1 ? ' top' : '');
-          div.textContent = n;
-          stackListG.appendChild(div);
-        });
+        nodeCircles[n].setAttribute('fill','transparent');
+        nodeCircles[n].setAttribute('stroke','rgba(0,20,60,0.20)');
+        nodeCircles[n].setAttribute('stroke-dasharray','4 3');
+        nodeLabels[n].setAttribute('fill','#6b7da0');
       }
-      gCounter.textContent = (gStep + 1) + ' / ' + gFrames.length;
-      gPrev.disabled = false;
-    }
-
-    function gGoNext() {
-      if (gStep < gFrames.length - 1) { gStep++;
-        renderGraph(); } else gStopAuto();
-    }
-
-    function gGoPrev() {
-      if (gStep > -1) { gStep--;
-        renderGraph(); }
-    }
-
-    function gResetFn() {
-      gStep = -1;
-      gStopAuto();
-      renderGraph();
-    }
-
-    function gStopAuto() {
-      if (gAutoTimer) { clearInterval(gAutoTimer);
-        gAutoTimer = null;
-        gAuto.textContent = '▶ Tự động'; }
-    }
-
-    function gToggleAuto() {
-      if (gAutoTimer) { gStopAuto(); return; }
-      gAuto.textContent = '⏸ Tạm dừng';
-      gAutoTimer = setInterval(() => {
-        if (gStep >= gFrames.length - 1) { gStopAuto(); return; }
-        gGoNext();
-      }, 750);
-    }
-
-    gNext.addEventListener('click', gGoNext);
-    gPrev.addEventListener('click', gGoPrev);
-    gReset.addEventListener('click', gResetFn);
-    gAuto.addEventListener('click', gToggleAuto);
-    renderGraph();
-
-    /* ============ MODEL 2: N-QUEENS (4x4) ============ */
-    const QN = 4;
-
-    function generateQueensFrames() {
-      const frames = [];
-      const board = Array(QN).fill(-1);
-      const stack = [];
-
-      function snapshot(extra) {
-        return Object.assign({ board: [...board], stack: [...stack] }, extra);
-      }
-
-      function isSafe(row, col) {
-        for (let r = 0; r < row; r++) {
-          const c = board[r];
-          if (c === col) return { conflict: true, type: 'column', row: r, col: c };
-          if (Math.abs(r - row) === Math.abs(c - col)) return { conflict: true, type: 'diagonal', row: r, col: c };
-        }
-        return { conflict: false };
-      }
-
-      function backtrack(row) {
-        if (row === QN) {
-          frames.push(snapshot({ type: 'success' }));
-          return true;
-        }
-        stack.push(row);
-        frames.push(snapshot({ type: 'push', row }));
-        for (let col = 0; col < QN; col++) {
-          frames.push(snapshot({ type: 'try', row, col }));
-          const check = isSafe(row, col);
-          if (check.conflict) {
-            frames.push(snapshot({ type: 'conflict', row, col, withRow: check.row, withCol: check.col, conflictType: check.type }));
-            continue;
-          }
-          board[row] = col;
-          frames.push(snapshot({ type: 'assign', row, col }));
-          if (backtrack(row + 1)) return true;
-          board[row] = -1;
-          frames.push(snapshot({ type: 'backtrack', row }));
-        }
-        frames.push(snapshot({ type: 'dead-end', row }));
-        stack.pop();
-        frames.push(snapshot({ type: 'pop', row }));
-        return false;
-      }
-      backtrack(0);
-      return frames;
-    }
-
-    const qFrames = generateQueensFrames();
-    let qStep = -1;
-    let qAutoTimer = null;
-    const queensBoard = document.getElementById('queensBoard');
-    const qCells = [];
-    for (let r = 0; r < QN; r++) {
-      for (let c = 0; c < QN; c++) {
-        const cell = document.createElement('div');
-        cell.className = 'q-cell';
-        cell.dataset.row = r;
-        cell.dataset.col = c;
-        queensBoard.appendChild(cell);
-        qCells.push(cell);
+      nodeCircles[n].removeAttribute('filter');
+    });
+    if (f.node && (f.type==='try'||f.type==='assign'||f.type==='conflict')) {
+      const c=nodeCircles[f.node];
+      c.setAttribute('filter','drop-shadow(0 0 10px '+(f.type==='conflict'?'#c94a6b':(f.type==='assign'?'#0f9d8e':'#d48c1c'))+')');
+      if (f.type!=='assign' && !f.assignment[f.node]) {
+        c.setAttribute('stroke',f.type==='conflict'?'#c94a6b':'#d48c1c');
+        c.setAttribute('stroke-width','3');
       }
     }
-
-    const stackListQ = document.getElementById('stackListQ');
-    const qCounter = document.getElementById('qCounter');
-    const qPrev = document.getElementById('qPrev'),
-      qNext = document.getElementById('qNext'),
-      qAuto = document.getElementById('qAuto'),
-      qReset = document.getElementById('qReset');
-
-    function renderQueens() {
-      if (qStep < 0) {
-        qCells.forEach(c => { c.className = 'q-cell';
-          c.textContent = ''; });
-        stackListQ.innerHTML = '<div class="stack-empty">— Chưa bắt đầu —</div>';
-        qCounter.textContent = '0 / ' + qFrames.length;
-        qPrev.disabled = true;
-        document.getElementById('queensExplanation').innerHTML =
-          '<strong>🎯 Mục tiêu:</strong> Đặt 4 quân hậu trên bàn cờ 4x4 sao cho <span class="highlight">không có 2 quân</span> cùng hàng, cùng cột, hay cùng đường chéo.<br>📌 <strong>Ràng buộc:</strong> <span class="constraint-tag">Global</span> Kiểm tra toàn bộ bàn cờ mỗi lần đặt.<br>🔍 <strong>Miền giá trị:</strong> {1,2,3,4} — cột cho mỗi hàng.';
-        return;
+    document.querySelectorAll('#graphSvg line').forEach(l => {
+      const a=l.dataset.a, b=l.dataset.b;
+      if (f.type==='conflict' && ((a===f.node&&b===f.withNode)||(b===f.node&&a===f.withNode))) {
+        l.setAttribute('stroke','#c94a6b'); l.setAttribute('stroke-width','3.5');
+      } else {
+        l.setAttribute('stroke','#b8c8e8'); l.setAttribute('stroke-width','2.2');
       }
-      const f = qFrames[qStep];
-
-      qCells.forEach(cell => {
-        const r = parseInt(cell.dataset.row);
-        const col = parseInt(cell.dataset.col);
-        const queenCol = f.board[r];
-        cell.className = 'q-cell';
-        cell.textContent = '';
-        if (queenCol === col) {
-          cell.classList.add('queen');
-          cell.textContent = '♛';
-        }
+    });
+    let msg='';
+    if (f.type==='push') msg=`📌 Xét đỉnh <strong>${f.node}</strong> (thêm vào stack)`;
+    else if (f.type==='try') msg=`🎨 Thử màu <span class="highlight">${f.color}</span> cho đỉnh <strong>${f.node}</strong> → kiểm tra ràng buộc Binary với các đỉnh kề`;
+    else if (f.type==='assign') msg=`✅ Gán màu <span class="highlight">${f.color}</span> cho đỉnh <strong>${f.node}</strong> (thỏa mãn tất cả ràng buộc)`;
+    else if (f.type==='conflict') msg=`❌ Xung đột Binary! Đỉnh <strong>${f.withNode}</strong> đã có màu <span class="highlight">${f.color}</span> → không thể gán, thử màu khác`;
+    else if (f.type==='backtrack') msg=`↩️ Quay lui: bỏ gán màu của đỉnh <strong>${f.node}</strong>, thử phương án khác`;
+    else if (f.type==='dead-end') msg=`🚫 Đỉnh <strong>${f.node}</strong> không có màu phù hợp → quay lui`;
+    else if (f.type==='pop') msg=`📤 Xóa đỉnh <strong>${f.node}</strong> khỏi stack (quay lui)`;
+    else if (f.type==='success') msg=`🎉 THÀNH CÔNG! Tất cả đỉnh đã được tô màu hợp lệ.`;
+    document.getElementById('graphExplanation').innerHTML =
+      `📍 <strong>Bước ${gStep+1}:</strong> ${msg}<br>📚 Stack: [${f.stack.join(' → ')}]`;
+    if (f.stack.length===0) {
+      stackListG.innerHTML='<div class="stack-empty">— Stack rỗng —</div>';
+    } else {
+      stackListG.innerHTML='';
+      f.stack.forEach((n,i) => {
+        const div=document.createElement('div');
+        div.className='stack-frame'+(i===f.stack.length-1?' top':'');
+        div.textContent=n; stackListG.appendChild(div);
       });
+    }
+    gCounter.textContent=(gStep+1)+' / '+gFrames.length;
+    gPrev.disabled=false;
+  }
 
-      if (f.row !== undefined && (f.type === 'try' || f.type === 'assign' || f.type === 'conflict')) {
-        const idx = f.row * QN + f.col;
-        if (idx < qCells.length) {
-          qCells[idx].classList.add(f.type === 'conflict' ? 'conflict' : 'active');
-          if (f.type === 'try' || f.type === 'conflict') {
-            qCells[idx].textContent = '♛';
-          }
-        }
-      }
+  function gGoNext() { if (gStep<gFrames.length-1) { gStep++; renderGraph(); } else gStopAuto(); }
+  function gGoPrev() { if (gStep>-1) { gStep--; renderGraph(); } }
+  function gResetFn() { gStep=-1; gStopAuto(); renderGraph(); }
+  function gStopAuto() {
+    if (gAutoTimer) { clearInterval(gAutoTimer); gAutoTimer=null; gAuto.textContent='▶ Tự động'; }
+  }
+  function gToggleAuto() {
+    if (gAutoTimer) { gStopAuto(); return; }
+    gAuto.textContent='⏸ Tạm dừng';
+    gAutoTimer=setInterval(() => { if (gStep>=gFrames.length-1) { gStopAuto(); return; } gGoNext(); }, 750);
+  }
+  gNext.addEventListener('click',gGoNext); gPrev.addEventListener('click',gGoPrev);
+  gReset.addEventListener('click',gResetFn); gAuto.addEventListener('click',gToggleAuto);
+  renderGraph();
 
-      if (f.type === 'conflict' && f.withRow !== undefined) {
-        const idx = f.withRow * QN + f.withCol;
-        if (idx < qCells.length) {
-          qCells[idx].classList.add('conflict');
-        }
-      }
+  /* ============ MODEL 2: N-QUEENS (4x4) ============ */
+  const QN=4;
 
-      let msg = '';
-      if (f.type === 'push') {
-        msg = `📌 Xét hàng <strong>${f.row+1}</strong> (thêm vào stack)`;
-      } else if (f.type === 'try') {
-        msg = `♛ Thử đặt hậu tại hàng <strong>${f.row+1}</strong>, cột <strong>${f.col+1}</strong> → kiểm tra ràng buộc Global (cột & đường chéo)`;
-      } else if (f.type === 'assign') {
-        msg = `✅ Đặt hậu tại (<strong>${f.row+1}</strong>, <strong>${f.col+1}</strong>) — thỏa mãn tất cả ràng buộc`;
-      } else if (f.type === 'conflict') {
-        const type = f.conflictType === 'column' ? 'cùng cột' : 'cùng đường chéo';
-        msg = `❌ Xung đột! Hậu tại (<strong>${f.row+1}</strong>, <strong>${f.col+1}</strong>) ${type} với hậu ở (<strong>${f.withRow+1}</strong>, <strong>${f.withCol+1}</strong>) → thử vị trí khác`;
-      } else if (f.type === 'backtrack') {
-        msg = `↩️ Quay lui: bỏ hậu ở hàng <strong>${f.row+1}</strong>, thử cột khác`;
-      } else if (f.type === 'dead-end') {
-        msg = `🚫 Hàng <strong>${f.row+1}</strong> không có cột phù hợp → quay lui`;
-      } else if (f.type === 'pop') {
-        msg = `📤 Xóa hàng <strong>${f.row+1}</strong> khỏi stack (quay lui)`;
-      } else if (f.type === 'success') {
-        msg = `🎉 THÀNH CÔNG! Đặt được 4 quân hậu hợp lệ.`;
+  function generateQueensFrames() {
+    const frames=[], board=Array(QN).fill(-1), stack=[];
+    function snapshot(extra) { return Object.assign({ board:[...board], stack:[...stack] }, extra); }
+    function isSafe(row,col) {
+      for (let r=0;r<row;r++) {
+        const c=board[r];
+        if (c===col) return {conflict:true,type:'column',row:r,col:c};
+        if (Math.abs(r-row)===Math.abs(c-col)) return {conflict:true,type:'diagonal',row:r,col:c};
       }
-      document.getElementById('queensExplanation').innerHTML =
-        `📍 <strong>Bước ${qStep+1}:</strong> ${msg}<br>📚 Stack: [${f.stack.map(r => 'Hàng '+(r+1)).join(' → ')}]`;
+      return {conflict:false};
+    }
+    function backtrack(row) {
+      if (row===QN) { frames.push(snapshot({type:'success'})); return true; }
+      stack.push(row); frames.push(snapshot({type:'push',row}));
+      for (let col=0;col<QN;col++) {
+        frames.push(snapshot({type:'try',row,col}));
+        const check=isSafe(row,col);
+        if (check.conflict) { frames.push(snapshot({type:'conflict',row,col,withRow:check.row,withCol:check.col,conflictType:check.type})); continue; }
+        board[row]=col; frames.push(snapshot({type:'assign',row,col}));
+        if (backtrack(row+1)) return true;
+        board[row]=-1; frames.push(snapshot({type:'backtrack',row}));
+      }
+      frames.push(snapshot({type:'dead-end',row}));
+      stack.pop(); frames.push(snapshot({type:'pop',row}));
+      return false;
+    }
+    backtrack(0); return frames;
+  }
 
-      if (f.stack.length === 0) {
-        stackListQ.innerHTML = '<div class="stack-empty">— Stack rỗng —</div>';
-      } else {
-        stackListQ.innerHTML = '';
-        f.stack.forEach((r, i) => {
-          const div = document.createElement('div');
-          div.className = 'stack-frame' + (i === f.stack.length - 1 ? ' top' : '');
-          div.textContent = 'Hàng ' + (r + 1);
-          stackListQ.appendChild(div);
-        });
+  const qFrames=generateQueensFrames();
+  let qStep=-1, qAutoTimer=null;
+  const queensBoard=document.getElementById('queensBoard');
+  const qCells=[];
+  for (let r=0;r<QN;r++) for (let c=0;c<QN;c++) {
+    const cell=document.createElement('div');
+    cell.className='q-cell'; cell.dataset.row=r; cell.dataset.col=c;
+    queensBoard.appendChild(cell); qCells.push(cell);
+  }
+  const stackListQ=document.getElementById('stackListQ');
+  const qCounter=document.getElementById('qCounter');
+  const qPrev=document.getElementById('qPrev'), qNext=document.getElementById('qNext'),
+        qAuto=document.getElementById('qAuto'), qReset=document.getElementById('qReset');
+
+  function renderQueens() {
+    if (qStep<0) {
+      qCells.forEach(c=>{c.className='q-cell'; c.textContent='';});
+      stackListQ.innerHTML='<div class="stack-empty">— Chưa bắt đầu —</div>';
+      qCounter.textContent='0 / '+qFrames.length; qPrev.disabled=true;
+      document.getElementById('queensExplanation').innerHTML=
+        '<strong>🎯 Mục tiêu:</strong> Đặt 4 quân hậu trên bàn cờ 4x4 sao cho <span class="highlight">không có 2 quân</span> cùng hàng, cùng cột, hay cùng đường chéo.<br>📌 <strong>Ràng buộc:</strong> <span class="constraint-tag">Global</span> Kiểm tra toàn bộ bàn cờ mỗi lần đặt.<br>🔍 <strong>Miền giá trị:</strong> {1,2,3,4} — cột cho mỗi hàng.';
+      return;
+    }
+    const f=qFrames[qStep];
+    qCells.forEach(cell => {
+      const r=parseInt(cell.dataset.row), col=parseInt(cell.dataset.col);
+      const queenCol=f.board[r]; cell.className='q-cell'; cell.textContent='';
+      if (queenCol===col) { cell.classList.add('queen'); cell.textContent='♛'; }
+    });
+    if (f.row!==undefined && (f.type==='try'||f.type==='assign'||f.type==='conflict')) {
+      const idx=f.row*QN+f.col;
+      if (idx<qCells.length) {
+        qCells[idx].classList.add(f.type==='conflict'?'conflict':'active');
+        if (f.type==='try'||f.type==='conflict') qCells[idx].textContent='♛';
       }
-      qCounter.textContent = (qStep + 1) + ' / ' + qFrames.length;
-      qPrev.disabled = false;
+    }
+    if (f.type==='conflict' && f.withRow!==undefined) {
+      const idx=f.withRow*QN+f.withCol;
+      if (idx<qCells.length) qCells[idx].classList.add('conflict');
+    }
+    let msg='';
+    if (f.type==='push') msg=`📌 Xét hàng <strong>${f.row+1}</strong> (thêm vào stack)`;
+    else if (f.type==='try') msg=`♛ Thử đặt hậu tại hàng <strong>${f.row+1}</strong>, cột <strong>${f.col+1}</strong> → kiểm tra ràng buộc Global (cột & đường chéo)`;
+    else if (f.type==='assign') msg=`✅ Đặt hậu tại (<strong>${f.row+1}</strong>, <strong>${f.col+1}</strong>) — thỏa mãn tất cả ràng buộc`;
+    else if (f.type==='conflict') {
+      const type=f.conflictType==='column'?'cùng cột':'cùng đường chéo';
+      msg=`❌ Xung đột! Hậu tại (<strong>${f.row+1}</strong>, <strong>${f.col+1}</strong>) ${type} với hậu ở (<strong>${f.withRow+1}</strong>, <strong>${f.withCol+1}</strong>) → thử vị trí khác`;
+    }
+    else if (f.type==='backtrack') msg=`↩️ Quay lui: bỏ hậu ở hàng <strong>${f.row+1}</strong>, thử cột khác`;
+    else if (f.type==='dead-end') msg=`🚫 Hàng <strong>${f.row+1}</strong> không có cột phù hợp → quay lui`;
+    else if (f.type==='pop') msg=`📤 Xóa hàng <strong>${f.row+1}</strong> khỏi stack (quay lui)`;
+    else if (f.type==='success') msg=`🎉 THÀNH CÔNG! Đặt được 4 quân hậu hợp lệ.`;
+    document.getElementById('queensExplanation').innerHTML=
+      `📍 <strong>Bước ${qStep+1}:</strong> ${msg}<br>📚 Stack: [${f.stack.map(r=>'Hàng '+(r+1)).join(' → ')}]`;
+    if (f.stack.length===0) {
+      stackListQ.innerHTML='<div class="stack-empty">— Stack rỗng —</div>';
+    } else {
+      stackListQ.innerHTML='';
+      f.stack.forEach((r,i) => {
+        const div=document.createElement('div');
+        div.className='stack-frame'+(i===f.stack.length-1?' top':'');
+        div.textContent='Hàng '+(r+1); stackListQ.appendChild(div);
+      });
+    }
+    qCounter.textContent=(qStep+1)+' / '+qFrames.length; qPrev.disabled=false;
+  }
+
+  function qGoNext() { if (qStep<qFrames.length-1) { qStep++; renderQueens(); } else qStopAuto(); }
+  function qGoPrev() { if (qStep>-1) { qStep--; renderQueens(); } }
+  function qResetFn() { qStep=-1; qStopAuto(); renderQueens(); }
+  function qStopAuto() {
+    if (qAutoTimer) { clearInterval(qAutoTimer); qAutoTimer=null; qAuto.textContent='▶ Tự động'; }
+  }
+  function qToggleAuto() {
+    if (qAutoTimer) { qStopAuto(); return; }
+    qAuto.textContent='⏸ Tạm dừng';
+    qAutoTimer=setInterval(()=>{ if (qStep>=qFrames.length-1){qStopAuto();return;} qGoNext(); },900);
+  }
+  qNext.addEventListener('click',qGoNext); qPrev.addEventListener('click',qGoPrev);
+  qReset.addEventListener('click',qResetFn); qAuto.addEventListener('click',qToggleAuto);
+  renderQueens();
+
+  /* ============ MODEL 3: SUDOKU 9x9 ============ */
+  const SN=9;
+
+  function createSudokuPuzzle() {
+    const puzzle=[
+      [5,3,0,0,7,0,0,0,0],
+      [6,0,0,1,9,5,0,0,0],
+      [0,9,8,0,0,0,0,6,0],
+      [8,0,0,0,6,0,0,0,3],
+      [4,0,0,8,0,3,0,0,1],
+      [7,0,0,0,2,0,0,0,6],
+      [0,6,0,0,0,0,2,8,0],
+      [0,0,0,4,1,9,0,0,5],
+      [0,0,0,0,8,0,0,7,9]
+    ];
+    return puzzle.flat();
+  }
+
+  const SUDOKU_GIVEN = createSudokuPuzzle();
+
+  /* ---------- Fast solver (for Show Solution) ---------- */
+  function solveSudoku(flatBoard) {
+    const b = [...flatBoard];
+    function isValidSol(pos, val) {
+      const r=Math.floor(pos/SN), c=pos%SN;
+      for (let i=0;i<SN;i++) {
+        if (i!==c && b[r*SN+i]===val) return false;
+        if (i!==r && b[i*SN+c]===val) return false;
+      }
+      const br=Math.floor(r/3)*3, bc=Math.floor(c/3)*3;
+      for (let i=br;i<br+3;i++) for (let j=bc;j<bc+3;j++) {
+        const p=i*SN+j;
+        if (p!==pos && b[p]===val) return false;
+      }
+      return true;
+    }
+    function solve() {
+      let pos=-1;
+      for (let p=0;p<SN*SN;p++) { if (b[p]===0) { pos=p; break; } }
+      if (pos===-1) return true;
+      for (let v=1;v<=SN;v++) {
+        if (isValidSol(pos,v)) { b[pos]=v; if (solve()) return true; b[pos]=0; }
+      }
+      return false;
+    }
+    solve();
+    return b;
+  }
+
+  /* ---------- Backtracking frames (for animation) ---------- */
+  function generateSudokuFrames() {
+    const frames=[], board=[...SUDOKU_GIVEN], stack=[];
+    function snapshot(extra) { return Object.assign({ board:[...board], stack:[...stack] }, extra); }
+    function isValid(pos, val) {
+      const r=Math.floor(pos/SN), c=pos%SN;
+      for (let i=0;i<SN;i++) {
+        if (i!==c && board[r*SN+i]===val) return {conflict:true,pos:r*SN+i,type:'hàng'};
+      }
+      for (let i=0;i<SN;i++) {
+        if (i!==r && board[i*SN+c]===val) return {conflict:true,pos:i*SN+c,type:'cột'};
+      }
+      const br=Math.floor(r/3)*3, bc=Math.floor(c/3)*3;
+      for (let i=br;i<br+3;i++) for (let j=bc;j<bc+3;j++) {
+        const p=i*SN+j;
+        if (p!==pos && board[p]===val) return {conflict:true,pos:p,type:'khối 3x3'};
+      }
+      return {conflict:false};
+    }
+    function findEmpty() {
+      for (let p=0;p<SN*SN;p++) if (board[p]===0) return p;
+      return -1;
+    }
+    function backtrack() {
+      const pos=findEmpty();
+      if (pos===-1) { frames.push(snapshot({type:'success'})); return true; }
+      stack.push(pos); frames.push(snapshot({type:'push',pos}));
+      for (let val=1;val<=SN;val++) {
+        frames.push(snapshot({type:'try',pos,val}));
+        const check=isValid(pos,val);
+        if (check.conflict) { frames.push(snapshot({type:'conflict',pos,val,withPos:check.pos,conflictType:check.type})); continue; }
+        board[pos]=val; frames.push(snapshot({type:'assign',pos,val}));
+        if (backtrack()) return true;
+        board[pos]=0; frames.push(snapshot({type:'backtrack',pos}));
+      }
+      frames.push(snapshot({type:'dead-end',pos}));
+      stack.pop(); frames.push(snapshot({type:'pop',pos}));
+      return false;
+    }
+    backtrack(); return frames;
+  }
+
+  const sFrames = generateSudokuFrames();
+  let sStep=-1, sAutoTimer=null;
+  let solutionShown=false;
+
+  /* Build main sudoku board cells */
+  const sudokuBoard=document.getElementById('sudokuBoard');
+  const sCells=[];
+  for (let p=0;p<SN*SN;p++) {
+    const cell=document.createElement('div');
+    cell.className='sd-cell'; cell.dataset.pos=p;
+    const r=Math.floor(p/SN), c=p%SN;
+    if ((c+1)%3===0 && c<SN-1) cell.classList.add('block-border-right');
+    if ((r+1)%3===0 && r<SN-1) cell.classList.add('block-border-bottom');
+    sudokuBoard.appendChild(cell); sCells.push(cell);
+  }
+
+  /* Build solution board cells */
+  const solutionBoardEl=document.getElementById('solutionBoard');
+  const solCells=[];
+  for (let p=0;p<SN*SN;p++) {
+    const cell=document.createElement('div');
+    cell.className='sol-cell'; cell.dataset.pos=p;
+    const r=Math.floor(p/SN), c=p%SN;
+    if ((c+1)%3===0 && c<SN-1) cell.classList.add('block-border-right');
+    if ((r+1)%3===0 && r<SN-1) cell.classList.add('block-border-bottom');
+    solutionBoardEl.appendChild(cell); solCells.push(cell);
+  }
+
+  const stackListS=document.getElementById('stackListS');
+  const sCounter=document.getElementById('sCounter');
+  const sPrev=document.getElementById('sPrev'), sNext=document.getElementById('sNext'),
+        sAuto=document.getElementById('sAuto'), sReset=document.getElementById('sReset'),
+        sShowSolution=document.getElementById('sShowSolution');
+  const solutionSection=document.getElementById('solutionSection');
+  const row0Steps=document.getElementById('row0Steps');
+  const row0StepsContent=document.getElementById('row0StepsContent');
+  const row0BadgeMain=document.getElementById('row0BadgeMain');
+
+  /* ---------- Row-0 detailed explanation ---------- */
+  function buildRow0Explanation(f) {
+    if (!f || f.pos === undefined) return null;
+    const row = Math.floor(f.pos / SN);
+    if (row !== 0) return null; // Only for row 0
+
+    const col = f.pos % SN + 1;
+    const lines = [];
+
+    if (f.type === 'push') {
+      lines.push(`➡️ <strong>Bắt đầu xét ô (1,${col})</strong> — ô trống đầu tiên trong hàng 1.`);
+      lines.push(`🔍 Sẽ thử lần lượt các số từ 1 đến 9.`);
+    } else if (f.type === 'try') {
+      lines.push(`🔢 <strong>Thử số ${f.val}</strong> vào ô (1,${col})`);
+      lines.push(`📋 Kiểm tra 3 ràng buộc:`);
+      lines.push(`&nbsp;&nbsp;① Hàng 1: không được trùng với các số đã có trong hàng`);
+      lines.push(`&nbsp;&nbsp;② Cột ${col}: không được trùng với các số đã có trong cột`);
+      lines.push(`&nbsp;&nbsp;③ Khối 3×3 (góc trên-${col<=3?'trái':col<=6?'giữa':'phải'}): không được trùng`);
+    } else if (f.type === 'assign') {
+      lines.push(`✅ <strong>Số ${f.val} HỢP LỆ</strong> → điền vào ô (1,${col})`);
+      lines.push(`🔒 Ô (1,${col}) = ${f.val} được ghi nhận. Tiến sang ô tiếp theo.`);
+    } else if (f.type === 'conflict') {
+      const cr=Math.floor(f.withPos/SN)+1, cc=f.withPos%SN+1;
+      lines.push(`❌ <strong>Số ${f.val} VI PHẠM ràng buộc!</strong>`);
+      lines.push(`⚠️ Ô (${cr},${cc}) đã có số ${f.val} (${f.conflictType} trùng).`);
+      lines.push(`🔄 Backtrack! Thử số ${f.val+1<=9?f.val+1:'(hết, quay lui ô trước)'}…`);
+    } else if (f.type === 'backtrack') {
+      lines.push(`↩️ <strong>QUAY LUI</strong> — xóa số ở ô (1,${col})`);
+      lines.push(`🔄 Lý do: không có số nào thỏa mãn ràng buộc ở các ô phía sau.`);
+    } else if (f.type === 'dead-end') {
+      lines.push(`🚫 <strong>Bế tắc tại ô (1,${col})</strong> — không có số nào từ 1-9 phù hợp!`);
+      lines.push(`↩️ Buộc phải quay lui và thay đổi lựa chọn ở ô trước đó.`);
+    } else if (f.type === 'pop') {
+      lines.push(`📤 <strong>Ô (1,${col}) bị xóa khỏi stack</strong> — quá trình backtracking hoàn tất cho ô này.`);
     }
 
-    function qGoNext() {
-      if (qStep < qFrames.length - 1) { qStep++;
-        renderQueens(); } else qStopAuto();
-    }
+    return lines.length ? lines.join('<br>') : null;
+  }
 
-    function qGoPrev() {
-      if (qStep > -1) { qStep--;
-        renderQueens(); }
-    }
-
-    function qResetFn() {
-      qStep = -1;
-      qStopAuto();
-      renderQueens();
-    }
-
-    function qStopAuto() {
-      if (qAutoTimer) { clearInterval(qAutoTimer);
-        qAutoTimer = null;
-        qAuto.textContent = '▶ Tự động'; }
-    }
-
-    function qToggleAuto() {
-      if (qAutoTimer) { qStopAuto(); return; }
-      qAuto.textContent = '⏸ Tạm dừng';
-      qAutoTimer = setInterval(() => {
-        if (qStep >= qFrames.length - 1) { qStopAuto(); return; }
-        qGoNext();
-      }, 900);
-    }
-
-    qNext.addEventListener('click', qGoNext);
-    qPrev.addEventListener('click', qGoPrev);
-    qReset.addEventListener('click', qResetFn);
-    qAuto.addEventListener('click', qToggleAuto);
-    renderQueens();
-
-    /* ============ MODEL 3: SUDOKU 9x9 ============ */
-    const SN = 9;
-
-    // Tạo bảng Sudoku 9x9 với một số ô cho sẵn
-    function createSudokuPuzzle() {
-      // Một puzzle Sudoku 9x9 hợp lệ (có lời giải)
-      const puzzle = [
-        [5, 3, 0, 0, 7, 0, 0, 0, 0],
-        [6, 0, 0, 1, 9, 5, 0, 0, 0],
-        [0, 9, 8, 0, 0, 0, 0, 6, 0],
-        [8, 0, 0, 0, 6, 0, 0, 0, 3],
-        [4, 0, 0, 8, 0, 3, 0, 0, 1],
-        [7, 0, 0, 0, 2, 0, 0, 0, 6],
-        [0, 6, 0, 0, 0, 0, 2, 8, 0],
-        [0, 0, 0, 4, 1, 9, 0, 0, 5],
-        [0, 0, 0, 0, 8, 0, 0, 7, 9]
-      ];
-      return puzzle.flat();
-    }
-
-    const SUDOKU_GIVEN = createSudokuPuzzle();
-
-    function generateSudokuFrames() {
-      const frames = [];
-      const board = [...SUDOKU_GIVEN];
-      const stack = [];
-
-      function snapshot(extra) {
-        return Object.assign({ board: [...board], stack: [...stack] }, extra);
-      }
-
-      function isValid(pos, val) {
-        const r = Math.floor(pos / SN),
-          c = pos % SN;
-        // Check row
-        for (let i = 0; i < SN; i++) {
-          if (i !== c && board[r * SN + i] === val) {
-            return { conflict: true, pos: r * SN + i, type: 'hàng' };
-          }
-        }
-        // Check column
-        for (let i = 0; i < SN; i++) {
-          if (i !== r && board[i * SN + c] === val) {
-            return { conflict: true, pos: i * SN + c, type: 'cột' };
-          }
-        }
-        // Check block 3x3
-        const br = Math.floor(r / 3) * 3,
-          bc = Math.floor(c / 3) * 3;
-        for (let i = br; i < br + 3; i++) {
-          for (let j = bc; j < bc + 3; j++) {
-            const p = i * SN + j;
-            if (p !== pos && board[p] === val) {
-              return { conflict: true, pos: p, type: 'khối 3x3' };
-            }
-          }
-        }
-        return { conflict: false };
-      }
-
-      function findEmpty() {
-        for (let p = 0; p < SN * SN; p++) {
-          if (board[p] === 0) return p;
-        }
-        return -1;
-      }
-
-      function backtrack() {
-        const pos = findEmpty();
-        if (pos === -1) {
-          frames.push(snapshot({ type: 'success' }));
-          return true;
-        }
-        stack.push(pos);
-        frames.push(snapshot({ type: 'push', pos }));
-        for (let val = 1; val <= SN; val++) {
-          frames.push(snapshot({ type: 'try', pos, val }));
-          const check = isValid(pos, val);
-          if (check.conflict) {
-            frames.push(snapshot({ type: 'conflict', pos, val, withPos: check.pos, conflictType: check.type }));
-            continue;
-          }
-          board[pos] = val;
-          frames.push(snapshot({ type: 'assign', pos, val }));
-          if (backtrack()) return true;
-          board[pos] = 0;
-          frames.push(snapshot({ type: 'backtrack', pos }));
-        }
-        frames.push(snapshot({ type: 'dead-end', pos }));
-        stack.pop();
-        frames.push(snapshot({ type: 'pop', pos }));
-        return false;
-      }
-      backtrack();
-      return frames;
-    }
-
-    const sFrames = generateSudokuFrames();
-    let sStep = -1;
-    let sAutoTimer = null;
-    const sudokuBoard = document.getElementById('sudokuBoard');
-    const sCells = [];
-    for (let p = 0; p < SN * SN; p++) {
-      const cell = document.createElement('div');
-      cell.className = 'sd-cell';
-      cell.dataset.pos = p;
-      const r = Math.floor(p / SN);
-      const c = p % SN;
-      // Thêm border cho khối 3x3
-      if ((c + 1) % 3 === 0 && c < SN - 1) cell.classList.add('block-border-right');
-      if ((r + 1) % 3 === 0 && r < SN - 1) cell.classList.add('block-border-bottom');
-      sudokuBoard.appendChild(cell);
-      sCells.push(cell);
-    }
-
-    const stackListS = document.getElementById('stackListS');
-    const sCounter = document.getElementById('sCounter');
-    const sPrev = document.getElementById('sPrev'),
-      sNext = document.getElementById('sNext'),
-      sAuto = document.getElementById('sAuto'),
-      sReset = document.getElementById('sReset');
-
-    function renderSudoku() {
-      if (sStep < 0) {
-        sCells.forEach((cell, p) => {
-          const val = SUDOKU_GIVEN[p];
-          cell.className = 'sd-cell';
-          if (val) {
-            cell.classList.add('given');
-            cell.textContent = val;
-          } else {
-            cell.textContent = '';
-          }
-          const r = Math.floor(p / SN);
-          const c = p % SN;
-          if ((c + 1) % 3 === 0 && c < SN - 1) cell.classList.add('block-border-right');
-          if ((r + 1) % 3 === 0 && r < SN - 1) cell.classList.add('block-border-bottom');
-        });
-        stackListS.innerHTML = '<div class="stack-empty">— Chưa bắt đầu —</div>';
-        sCounter.textContent = '0 / ' + sFrames.length;
-        sPrev.disabled = true;
-        document.getElementById('sudokuExplanation').innerHTML =
-          '<strong>🎯 Mục tiêu:</strong> Điền số 1-9 vào bảng 9x9 sao cho <span class="highlight">hàng, cột, khối 3x3</span> không trùng.<br>📌 <strong>Ràng buộc:</strong> <span class="constraint-tag">Global</span> + <span class="constraint-tag">Binary</span> Kiểm tra hàng, cột, khối 3x3.<br>🔍 <strong>Miền giá trị:</strong> {1..9} — hữu hạn, rời rạc.<br>📐 <strong>Tổng số ô:</strong> 81 ô cần điền.';
-        return;
-      }
-      const f = sFrames[sStep];
-
+  /* ---------- Render main sudoku board ---------- */
+  function renderSudoku() {
+    if (sStep < 0) {
       sCells.forEach((cell, p) => {
-        const val = f.board[p];
-        const isGiven = SUDOKU_GIVEN[p] !== 0;
+        const val = SUDOKU_GIVEN[p];
         cell.className = 'sd-cell';
-        if (isGiven && val) {
-          cell.classList.add('given');
-          cell.textContent = val;
-        } else if (val) {
-          cell.classList.add('filled');
-          cell.textContent = val;
-        } else {
-          cell.textContent = '';
-        }
-        const r = Math.floor(p / SN);
-        const c = p % SN;
-        if ((c + 1) % 3 === 0 && c < SN - 1) cell.classList.add('block-border-right');
-        if ((r + 1) % 3 === 0 && r < SN - 1) cell.classList.add('block-border-bottom');
+        if (val) { cell.classList.add('given'); cell.textContent = val; }
+        else cell.textContent = '';
+        const r=Math.floor(p/SN), c=p%SN;
+        if ((c+1)%3===0 && c<SN-1) cell.classList.add('block-border-right');
+        if ((r+1)%3===0 && r<SN-1) cell.classList.add('block-border-bottom');
       });
+      stackListS.innerHTML='<div class="stack-empty">— Chưa bắt đầu —</div>';
+      sCounter.textContent='0 / '+sFrames.length; sPrev.disabled=true;
+      row0Steps.style.display='none';
+      row0BadgeMain.style.display='none';
+      document.getElementById('sudokuExplanation').className='explanation-box';
+      document.getElementById('sudokuExplanation').innerHTML=
+        '<strong>🎯 Mục tiêu:</strong> Điền số 1-9 vào bảng 9x9 sao cho <span class="highlight">hàng, cột, khối 3x3</span> không trùng.<br>📌 <strong>Ràng buộc:</strong> <span class="constraint-tag">Global</span> + <span class="constraint-tag">Binary</span> Kiểm tra hàng, cột, khối 3x3.<br>🔍 <strong>Miền giá trị:</strong> {1..9} — hữu hạn, rời rạc.<br>📐 <strong>Tổng số ô:</strong> 81 ô cần điền.';
+      return;
+    }
+    const f = sFrames[sStep];
+    const isRow0Step = (f.pos !== undefined && Math.floor(f.pos/SN) === 0);
 
-      if (f.pos !== undefined && (f.type === 'try' || f.type === 'assign' || f.type === 'conflict')) {
-        sCells[f.pos].classList.add(f.type === 'conflict' ? 'conflict' : 'active');
-        if (f.type === 'try' || f.type === 'conflict') {
-          sCells[f.pos].textContent = f.val;
-        }
-      }
-
-      if (f.type === 'conflict' && f.withPos !== undefined) {
-        sCells[f.withPos].classList.add('conflict');
-      }
-
-      let msg = '';
-      const r = f.pos !== undefined ? Math.floor(f.pos / SN) + 1 : '?';
-      const c = f.pos !== undefined ? f.pos % SN + 1 : '?';
-      if (f.type === 'push') {
-        msg = `📌 Xét ô (${r},${c}) (thêm vào stack)`;
-      } else if (f.type === 'try') {
-        msg = `🔢 Thử số <span class="highlight">${f.val}</span> tại ô (${r},${c}) → kiểm tra ràng buộc hàng, cột, khối 3x3`;
-      } else if (f.type === 'assign') {
-        msg = `✅ Điền số <span class="highlight">${f.val}</span> vào ô (${r},${c}) — thỏa mãn tất cả ràng buộc`;
-      } else if (f.type === 'conflict') {
-        const cr = Math.floor(f.withPos / SN) + 1;
-        const cc = f.withPos % SN + 1;
-        msg = `❌ Xung đột! Số <span class="highlight">${f.val}</span> tại ô (${r},${c}) trùng với ô (${cr},${cc}) (${f.conflictType}) → thử số khác`;
-      } else if (f.type === 'backtrack') {
-        msg = `↩️ Quay lui: xóa số ở ô (${r},${c}), thử số khác`;
-      } else if (f.type === 'dead-end') {
-        msg = `🚫 Ô (${r},${c}) không có số phù hợp → quay lui`;
-      } else if (f.type === 'pop') {
-        msg = `📤 Xóa ô (${r},${c}) khỏi stack (quay lui)`;
-      } else if (f.type === 'success') {
-        msg = `🎉 THÀNH CÔNG! Bảng Sudoku 9x9 (81 ô) đã được điền đầy đủ.`;
-      }
-      document.getElementById('sudokuExplanation').innerHTML =
-        `📍 <strong>Bước ${sStep+1}:</strong> ${msg}<br>📚 Stack: [${f.stack.map(p => '('+(Math.floor(p/SN)+1)+','+(p%SN+1)+')').join(' → ')}]`;
-
-      if (f.stack.length === 0) {
-        stackListS.innerHTML = '<div class="stack-empty">— Stack rỗng —</div>';
+    sCells.forEach((cell, p) => {
+      const val = f.board[p];
+      const isGiven = SUDOKU_GIVEN[p] !== 0;
+      const r=Math.floor(p/SN), c=p%SN;
+      cell.className = 'sd-cell';
+      if (isGiven && val) { cell.classList.add('given'); cell.textContent = val; }
+      else if (val) {
+        // Row-0 placed cells get special color
+        if (r === 0) cell.classList.add('row0-placed');
+        else cell.classList.add('filled');
+        cell.textContent = val;
       } else {
-        stackListS.innerHTML = '';
-        f.stack.forEach((p, i) => {
-          const div = document.createElement('div');
-          div.className = 'stack-frame' + (i === f.stack.length - 1 ? ' top' : '');
-          div.textContent = '(' + (Math.floor(p / SN) + 1) + ',' + (p % SN + 1) + ')';
-          stackListS.appendChild(div);
-        });
+        // Highlight row-0 empty cells subtly
+        if (r === 0) cell.classList.add('row0-highlight');
+        cell.textContent = '';
       }
-      sCounter.textContent = (sStep + 1) + ' / ' + sFrames.length;
-      sPrev.disabled = false;
+      if ((c+1)%3===0 && c<SN-1) cell.classList.add('block-border-right');
+      if ((r+1)%3===0 && r<SN-1) cell.classList.add('block-border-bottom');
+    });
+
+    // Active/conflict overlay
+    if (f.pos !== undefined && (f.type==='try'||f.type==='assign'||f.type==='conflict')) {
+      const r0=Math.floor(f.pos/SN);
+      if (f.type==='conflict') {
+        sCells[f.pos].className='sd-cell '+(r0===0?'row0-conflict':'conflict');
+      } else if (f.type==='try') {
+        sCells[f.pos].className='sd-cell '+(r0===0?'row0-try':'active');
+      } else {
+        sCells[f.pos].className='sd-cell '+(r0===0?'row0-ok':'active');
+      }
+      const r=Math.floor(f.pos/SN), c=f.pos%SN;
+      if ((c+1)%3===0 && c<SN-1) sCells[f.pos].classList.add('block-border-right');
+      if ((r+1)%3===0 && r<SN-1) sCells[f.pos].classList.add('block-border-bottom');
+      if (f.type==='try'||f.type==='conflict') sCells[f.pos].textContent=f.val;
+    }
+    if (f.type==='conflict' && f.withPos!==undefined) {
+      const r=Math.floor(f.withPos/SN), c=f.withPos%SN;
+      sCells[f.withPos].classList.add('conflict');
+      if ((c+1)%3===0 && c<SN-1) sCells[f.withPos].classList.add('block-border-right');
+      if ((r+1)%3===0 && r<SN-1) sCells[f.withPos].classList.add('block-border-bottom');
     }
 
-    function sGoNext() {
-      if (sStep < sFrames.length - 1) { sStep++;
-        renderSudoku(); } else sStopAuto();
+    // Main explanation message
+    let msg='';
+    const rowNum = f.pos!==undefined ? Math.floor(f.pos/SN)+1 : '?';
+    const colNum = f.pos!==undefined ? f.pos%SN+1 : '?';
+    if (f.type==='push') msg=`📌 Xét ô (${rowNum},${colNum}) (thêm vào stack)`;
+    else if (f.type==='try') msg=`🔢 Thử số <span class="highlight">${f.val}</span> tại ô (${rowNum},${colNum}) → kiểm tra ràng buộc hàng, cột, khối 3x3`;
+    else if (f.type==='assign') msg=`✅ Điền số <span class="highlight">${f.val}</span> vào ô (${rowNum},${colNum}) — thỏa mãn tất cả ràng buộc`;
+    else if (f.type==='conflict') {
+      const cr=Math.floor(f.withPos/SN)+1, cc=f.withPos%SN+1;
+      msg=`❌ Xung đột! Số <span class="highlight">${f.val}</span> tại ô (${rowNum},${colNum}) trùng với ô (${cr},${cc}) (${f.conflictType}) → thử số khác`;
+    }
+    else if (f.type==='backtrack') msg=`↩️ Quay lui: xóa số ở ô (${rowNum},${colNum}), thử số khác`;
+    else if (f.type==='dead-end') msg=`🚫 Ô (${rowNum},${colNum}) không có số phù hợp → quay lui`;
+    else if (f.type==='pop') msg=`📤 Xóa ô (${rowNum},${colNum}) khỏi stack (quay lui)`;
+    else if (f.type==='success') msg=`🎉 THÀNH CÔNG! Bảng Sudoku 9x9 (81 ô) đã được điền đầy đủ.`;
+
+    const explBox=document.getElementById('sudokuExplanation');
+    explBox.className='explanation-box'+(isRow0Step?' row0-mode':'');
+    explBox.innerHTML=`📍 <strong>Bước ${sStep+1}:</strong> ${isRow0Step?'<span style="color:var(--violet);font-weight:700;">[🔍 Hàng 1]</span> ':''}${msg}<br>📚 Stack: [${f.stack.map(p=>'('+(Math.floor(p/SN)+1)+','+(p%SN+1)+')').join(' → ')}]`;
+
+    // Row-0 detailed steps panel
+    const r0explain=buildRow0Explanation(f);
+    if (r0explain) {
+      row0Steps.style.display='block';
+      row0StepsContent.innerHTML=r0explain;
+      row0BadgeMain.style.display='inline-block';
+    } else {
+      row0Steps.style.display='none';
+      row0BadgeMain.style.display='none';
     }
 
-    function sGoPrev() {
-      if (sStep > -1) { sStep--;
-        renderSudoku(); }
+    // Stack list
+    if (f.stack.length===0) {
+      stackListS.innerHTML='<div class="stack-empty">— Stack rỗng —</div>';
+    } else {
+      stackListS.innerHTML='';
+      f.stack.forEach((p,i) => {
+        const div=document.createElement('div');
+        div.className='stack-frame'+(i===f.stack.length-1?' top':'');
+        div.textContent='('+(Math.floor(p/SN)+1)+','+(p%SN+1)+')';
+        stackListS.appendChild(div);
+      });
     }
 
-    function sResetFn() {
-      sStep = -1;
-      sStopAuto();
-      renderSudoku();
+    sCounter.textContent=(sStep+1)+' / '+sFrames.length;
+    sPrev.disabled=false;
+  }
+
+  /* ---------- Show Solution ---------- */
+  function showSolution() {
+    if (solutionShown) {
+      // Toggle off
+      solutionSection.style.display='none';
+      solutionShown=false;
+      sShowSolution.classList.remove('active-sol');
+      sShowSolution.textContent='✨ Hiển thị đáp án';
+      return;
     }
 
-    function sStopAuto() {
-      if (sAutoTimer) { clearInterval(sAutoTimer);
-        sAutoTimer = null;
-        sAuto.textContent = '▶ Tự động'; }
-    }
+    // Solve and display
+    const solved = solveSudoku([...SUDOKU_GIVEN]);
+    solutionSection.style.display='block';
+    solutionShown=true;
+    sShowSolution.classList.add('active-sol');
+    sShowSolution.textContent='🙈 Ẩn đáp án';
 
-    function sToggleAuto() {
-      if (sAutoTimer) { sStopAuto(); return; }
-      sAuto.textContent = '⏸ Tạm dừng';
-      sAutoTimer = setInterval(() => {
-        if (sStep >= sFrames.length - 1) { sStopAuto(); return; }
-        sGoNext();
-      }, 400);
-    }
+    // Animate cells in
+    solCells.forEach((cell, p) => {
+      const val=solved[p];
+      const isGiven=SUDOKU_GIVEN[p]!==0;
+      cell.className='sol-cell';
+      const r=Math.floor(p/SN), c=p%SN;
+      if ((c+1)%3===0 && c<SN-1) cell.classList.add('block-border-right');
+      if ((r+1)%3===0 && r<SN-1) cell.classList.add('block-border-bottom');
+      if (isGiven) {
+        cell.classList.add('sol-given');
+        cell.textContent=val;
+      } else {
+        cell.classList.add('sol-empty');
+        cell.textContent='';
+        // Staggered animation
+        const delay = Math.floor(p/SN)*30 + (p%SN)*15;
+        setTimeout(()=>{
+          cell.classList.remove('sol-empty');
+          cell.classList.add('sol-filled');
+          cell.textContent=val;
+        }, delay);
+      }
+    });
+  }
 
-    sNext.addEventListener('click', sGoNext);
-    sPrev.addEventListener('click', sGoPrev);
-    sReset.addEventListener('click', sResetFn);
-    sAuto.addEventListener('click', sToggleAuto);
+  function sGoNext() { if (sStep<sFrames.length-1) { sStep++; renderSudoku(); } else sStopAuto(); }
+  function sGoPrev() { if (sStep>-1) { sStep--; renderSudoku(); } }
+  function sResetFn() {
+    sStep=-1; sStopAuto();
+    // Also hide solution
+    solutionSection.style.display='none';
+    solutionShown=false;
+    sShowSolution.classList.remove('active-sol');
+    sShowSolution.textContent='✨ Hiển thị đáp án';
     renderSudoku();
-  })();
+  }
+  function sStopAuto() {
+    if (sAutoTimer) { clearInterval(sAutoTimer); sAutoTimer=null; sAuto.textContent='▶ Tự động'; }
+  }
+  function sToggleAuto() {
+    if (sAutoTimer) { sStopAuto(); return; }
+    sAuto.textContent='⏸ Tạm dừng';
+    sAutoTimer=setInterval(()=>{ if (sStep>=sFrames.length-1){sStopAuto();return;} sGoNext(); }, 400);
+  }
+
+  sNext.addEventListener('click', sGoNext);
+  sPrev.addEventListener('click', sGoPrev);
+  sReset.addEventListener('click', sResetFn);
+  sAuto.addEventListener('click', sToggleAuto);
+  sShowSolution.addEventListener('click', showSolution);
+  renderSudoku();
+
+})();
 </script>
 </body>
 </html>
